@@ -2,7 +2,7 @@ import React from "react";
 import MovieCard from "@components/MovieCard";
 import Image from "next/image";
 import { AiFillPlayCircle } from "react-icons/ai";
-
+import MainBtn from "@components/ui/MainBtn";
 const Home = () => {
   return (
     <>
@@ -22,23 +22,16 @@ const Home = () => {
             alt="main image"
           ></Image>
           <div className="absolute top-1/2 left-1/4 md:-translate-x-80 -translate-y-1/2">
-            <h1 className="text-white text-5xl main-color">MovieHub</h1>
+            <h1 className="text-white text-5xl font-extrabold main-color">
+              MovieHub
+            </h1>
             <p className="text-4xl text-white max-w-md mt-10">
               Track Your <span className="main-color"> Favorite</span> Movies &
               TV Shows
             </p>
-            <a
-              href="#_"
-              className="px-5 py-2.5 relative rounded group font-medium text-white mt-10 inline-block"
-            >
-              <span className="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-l from-rose-700 to-pink-600"></span>
-              <span className="h-full w-full inset-0 absolute mt-0.5 ml-0.5 filter group-active:opacity-0 rounded opacity-50 bg-gradient-to-l from-rose-700 to-pink-600"></span>
-              <span className="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl filter group-active:opacity-0 group-hover:blur-sm bg-gradient-to-l from-rose-700 to-pink-600"></span>
-              <span className="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-l from-rose-700 to-pink-600"></span>
-              <span className="relative flex items-center gap-2">
-                <AiFillPlayCircle></AiFillPlayCircle> Watch Now
-              </span>
-            </a>
+            <div className="mt-10">
+              <MainBtn icon={<AiFillPlayCircle />} text="Watch Now" url="/" />
+            </div>
           </div>
         </div>
       </div>
