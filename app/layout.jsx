@@ -1,5 +1,6 @@
 import React from "react";
 import "@styles/globals.css";
+
 import Nav from "@components/Nav";
 import { PageWrapper } from "@components/PageWrapper";
 

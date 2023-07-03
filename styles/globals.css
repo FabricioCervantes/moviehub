@@ -19,3 +19,7 @@
 .main-color {
   @apply text-[#E94560];
 }
+
+.main-color-bg {
+  @apply bg-[#E94560];
+}
