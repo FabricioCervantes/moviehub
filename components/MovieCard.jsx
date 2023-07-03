@@ -21,7 +21,7 @@ function MovieCard({ movie }) {
         <div className="mt-5">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-bold">{movie.title}</h1>
-            <p>{movie.release_date}</p>
+            <p>{movie.release_date.split("-")[0]}</p>
           </div>
           <div className="flex mt-5 justify-between">
             <p>4k</p>
