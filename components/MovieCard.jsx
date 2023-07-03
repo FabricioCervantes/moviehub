@@ -9,6 +9,7 @@ const MovieCard = () => {
         width={300}
         height={300}
         alt="movie poster"
+        className="rounded-md"
       ></Image>
       <div>
         <div className="flex justify-between">
