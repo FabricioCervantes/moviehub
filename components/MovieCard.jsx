@@ -3,13 +3,15 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { AiFillLike } from "react-icons/ai";
 
-const MovieCard = () => {
+function MovieCard({ movie }) {
+  console.log(movie);
   return (
     <div className="p-2 text-white rounded-md w-fit">
       <motion.div whileHover={{ scale: 1.05 }}>
         <Image
-          src="/assets/barbie.jpg"
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           width={300}
           height={300}
           alt="movie poster"
@@ -18,20 +20,23 @@ const MovieCard = () => {
 
         <div className="mt-5">
           <div className="flex items-center justify-between">
-            <h1 className="text-4xl">Barbie</h1>
-            <p>2023</p>
+            <h1 className="text-xl font-bold">{movie.title}</h1>
+            <p>{movie.release_date}</p>
           </div>
           <div className="flex mt-5 justify-between">
-            <p>4K</p>
+            <p>4k</p>
             <div className="flex justify-between gap-5">
-              <p>90 min</p>
-              <p>4.5</p>
+              <p>{movie.runtime}</p>
+              <p className="flex gap-2 items-center">
+                <AiFillLike />
+                {movie.vote_average}
+              </p>
             </div>
           </div>
         </div>
       </motion.div>
     </div>
   );
-};
+}
 
 export default MovieCard;
