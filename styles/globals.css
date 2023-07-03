@@ -15,3 +15,7 @@
 .bg {
   @apply bg-[#0E1017];
 }
+
+.main-color {
+  @apply text-[#E94560];
+}
