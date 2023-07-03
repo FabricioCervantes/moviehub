@@ -5,7 +5,7 @@ import MainBtn from "./ui/MainBtn";
 
 const Nav = () => {
   return (
-    <nav className="nav-bg flex justify-between text-white p-5 items-center">
+    <nav className="bg-transparent w-full flex justify-between text-white p-5 items-center">
       <Link href="/">
         <Image
           src="/assets/logo.png"
