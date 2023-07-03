@@ -1,6 +1,7 @@
 import React from "react";
 import "@styles/globals.css";
 import Nav from "@components/Nav";
+import { PageWrapper } from "@components/PageWrapper";
 
 export const metadata = {
   title: "MovieHub",
@@ -11,8 +12,10 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body className="bg h-screen">
-        <Nav />
-        <main>{children}</main>
+        <PageWrapper>
+          <Nav />
+          {children}
+        </PageWrapper>
       </body>
     </html>
   );
