@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import { useEffect, useState } from "react";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+
 import Image from "next/image";
 import MainBtn from "./ui/MainBtn";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -14,6 +18,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Nav = () => {
+  const { data: session } = useSession();
+
+  const [providers, setProviders] = useState(null);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getProviders();
+      setProviders(res);
+    })();
+  }, []);
+
   return (
     <nav className="flex bg-transparent justify-between text-white p-5 items-center">
       <Link href="/">
@@ -38,9 +54,27 @@ const Nav = () => {
           <div className="text-2xl font-bold">ABOUT</div>
         </Link>
       </ul>
-      <ul className="hidden md:block">
-        <MainBtn text="Sign In" />
-      </ul>
+      {session?.user ? (
+        <ul className="hidden md:block">
+          <MainBtn text="Sign Out" />
+        </ul>
+      ) : (
+        <ul className="hidden md:block">
+          {providers &&
+            Object.values(providers).map((provider) => (
+              <button
+                type="button"
+                key={provider.name}
+                onClick={() => {
+                  signIn(provider.id);
+                }}
+                text="Sign In"
+              >
+                Sign In
+              </button>
+            ))}
+        </ul>
+      )}
       <ul className="md:hidden">
         <DropdownMenu>
           <DropdownMenuTrigger>

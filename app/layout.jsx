@@ -3,6 +3,7 @@ import "@styles/globals.css";
 
 import Nav from "@components/Nav";
 import { PageWrapper } from "@components/PageWrapper";
+import Provider from "@components/Provider";
 
 export const metadata = {
   title: "MovieHub",
@@ -13,10 +14,10 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body className="bg h-screen">
-        <PageWrapper>
+        <Provider>
           <Nav />
           {children}
-        </PageWrapper>
+        </Provider>
       </body>
     </html>
   );
