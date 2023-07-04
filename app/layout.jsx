@@ -13,10 +13,10 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body className="bg h-screen">
-        <PageWrapper>
-          <Nav />
-          {children}
-        </PageWrapper>
+        {/* <PageWrapper> */}
+        <Nav />
+        {children}
+        {/* </PageWrapper> */}
       </body>
     </html>
   );
