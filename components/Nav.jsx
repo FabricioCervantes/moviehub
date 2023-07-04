@@ -15,7 +15,7 @@ import {
 
 const Nav = () => {
   return (
-    <nav className="w-full flex justify-between text-white p-5 items-center">
+    <nav className="flex sticky top-0 bg-transparent justify-between text-white p-5 items-center">
       <Link href="/">
         <Image
           src="/assets/logo.png"

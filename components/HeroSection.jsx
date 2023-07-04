@@ -8,7 +8,7 @@ import MainBtn from "@components/ui/MainBtn";
 
 const HeroSection = () => {
   return (
-    <div className="relative">
+    <div className="relative top-0">
       <Image
         src="/assets/test1.jpg"
         width={0}
