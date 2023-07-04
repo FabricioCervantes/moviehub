@@ -7,6 +7,7 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import Image from "next/image";
 import MainBtn from "./ui/MainBtn";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   DropdownMenu,
@@ -55,23 +56,27 @@ const Nav = () => {
         </Link>
       </ul>
       {session?.user ? (
-        <ul className="hidden md:block">
-          <MainBtn text="Sign Out" />
-        </ul>
+        <div className="flex gap-5 items-center">
+          <ul className="hidden md:block">
+            <MainBtn action={signOut} text="Sign Out" />
+          </ul>
+          <Avatar className="hidden md:block">
+            <AvatarImage src={session?.user.image} />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
       ) : (
         <ul className="hidden md:block">
           {providers &&
             Object.values(providers).map((provider) => (
-              <button
+              <MainBtn
                 type="button"
                 key={provider.name}
-                onClick={() => {
+                action={() => {
                   signIn(provider.id);
                 }}
                 text="Sign In"
-              >
-                Sign In
-              </button>
+              ></MainBtn>
             ))}
         </ul>
       )}
@@ -82,7 +87,31 @@ const Nav = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg border-0 text-white w-screen h-screen flex flex-col pt-20 gap-8 items-center">
             <DropdownMenuLabel>
-              <MainBtn text="Sign In" />
+              {session?.user ? (
+                <div className="flex flex-col gap-10 items-center">
+                  <Avatar className="h-32 w-auto">
+                    <AvatarImage src={session?.user.image} />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                  <ul>
+                    <MainBtn action={signOut} text="Sign Out" />
+                  </ul>
+                </div>
+              ) : (
+                <ul>
+                  {providers &&
+                    Object.values(providers).map((provider) => (
+                      <MainBtn
+                        type="button"
+                        key={provider.name}
+                        action={() => {
+                          signIn(provider.id);
+                        }}
+                        text="Sign In"
+                      ></MainBtn>
+                    ))}
+                </ul>
+              )}
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

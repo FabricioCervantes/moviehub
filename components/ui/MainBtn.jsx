@@ -1,9 +1,9 @@
 import React from "react";
 
-const MainBtn = ({ text, icon, url }) => {
+const MainBtn = ({ text, icon, action }) => {
   return (
-    <a
-      href={url}
+    <button
+      onClick={action}
       className="px-5 py-2.5 relative rounded group font-medium text-white inline-block"
     >
       <span className="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-l from-rose-700 to-pink-600"></span>
@@ -14,7 +14,7 @@ const MainBtn = ({ text, icon, url }) => {
         {icon}
         {text}
       </span>
-    </a>
+    </button>
   );
 };
 
