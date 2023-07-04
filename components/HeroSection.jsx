@@ -26,7 +26,7 @@ const HeroSection = () => {
         initial={{ y: 400, x: -250 }}
         animate={{ y: -150 }}
         transition={{ duration: 1 }}
-        className="top-1/2 hidden md:absolute left-1/4 md:-translate-x-80 -translate-y-1/2"
+        className="top-1/2 hidden md:block absolute left-1/4 md:-translate-x-80 -translate-y-1/2"
       >
         <h1 className="text-white text-5xl font-extrabold main-color">
           MovieHub
