@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { AiFillLike } from "react-icons/ai";
 
 function MovieCard({ movie }) {
-  console.log(movie);
   return (
     <div className=" text-white rounded-md w-fit">
       <motion.div whileHover={{ scale: 1.05 }}>
