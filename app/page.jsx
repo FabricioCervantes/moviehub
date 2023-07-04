@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React from "react";
 import HeroSection from "@components/HeroSection";
 import Badge from "@components/ui/Badge";
 import NowPlaying from "@components/NowPlaying";
