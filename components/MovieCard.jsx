@@ -8,7 +8,7 @@ import { AiFillLike } from "react-icons/ai";
 function MovieCard({ movie }) {
   console.log(movie);
   return (
-    <div className="p-2 text-white rounded-md w-fit">
+    <div className=" text-white rounded-md w-fit">
       <motion.div whileHover={{ scale: 1.05 }}>
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

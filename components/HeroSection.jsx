@@ -26,7 +26,24 @@ const HeroSection = () => {
         initial={{ y: 400, x: -250 }}
         animate={{ y: -150 }}
         transition={{ duration: 1 }}
-        className="absolute top-1/2 left-1/4 md:-translate-x-80 -translate-y-1/2"
+        className="top-1/2 hidden md:absolute left-1/4 md:-translate-x-80 -translate-y-1/2"
+      >
+        <h1 className="text-white text-5xl font-extrabold main-color">
+          MovieHub
+        </h1>
+        <p className="text-4xl text-white max-w-md mt-10">
+          Track Your <span className="main-color"> Favorite</span> Movies & TV
+          Shows
+        </p>
+        <div className="mt-10">
+          <MainBtn icon={<AiFillPlayCircle />} text="Watch Now" url="/" />
+        </div>
+      </motion.div>
+      <motion.div
+        initial={{ y: 400, x: -70 }}
+        animate={{ y: -150 }}
+        transition={{ duration: 1 }}
+        className="top-1/2 absolute md:hidden left-1/4 md:-translate-x-80 -translate-y-1/2"
       >
         <h1 className="text-white text-5xl font-extrabold main-color">
           MovieHub
