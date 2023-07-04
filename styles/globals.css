@@ -23,3 +23,22 @@
 .main-color-bg {
   @apply bg-[#E94560];
 }
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.embla__button {
+  @apply z-[1] absolute translate-y-[850px] cursor-pointer w-16 h-16 top-1/2;
+}
+
+.embla_right {
+  right: -0.5rem;
+}
