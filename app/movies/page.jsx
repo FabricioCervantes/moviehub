@@ -104,6 +104,10 @@ const Movies = () => {
             <p
               onClick={() => {
                 handlePage(item);
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
               }}
               //check if page is active
               className={`${
