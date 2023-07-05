@@ -8,7 +8,9 @@ import { motion } from "framer-motion";
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [genre, setGenre] = useState([]);
-  const [page, setPage] = useState(2);
+  const [selectedGenre, setSelectedGenre] = useState(28);
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState("popularity.desc");
 
   const pag = Array.from(Array(5).keys()).map((i) => i + 1);
 
@@ -18,23 +20,31 @@ const Movies = () => {
     ).then((res) => res.json());
   };
 
-  const fetchUpcomingMovies = (genre, page) => {
-    console.log(page);
+  const fetchUpcomingMovies = () => {
+    console.log("Genre: " + genre);
+    console.log("Sort: " + sort);
+    console.log("Page: " + page);
+
     return fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=${page}&with_genres=${genre}&sort_by=revenue.desc`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=${page}&with_genres=${selectedGenre}&sort_by=${sort}`
     ).then((res) => res.json());
   };
 
   const fetchMovies = async () => {
     const test = await fetchGenre();
-    const upcomingMovies = await fetchUpcomingMovies(28, page);
+    const upcomingMovies = await fetchUpcomingMovies();
     setMovies(upcomingMovies.results);
     setGenre(test.genres);
   };
 
   useEffect(() => {
     fetchMovies();
-  }, []);
+  }, [sort, page, selectedGenre]);
+
+  const handlePage = (item) => {
+    setPage(item);
+    fetchMovies();
+  };
 
   return (
     <>
@@ -45,9 +55,8 @@ const Movies = () => {
               className="bg-red-500 px-6 py-2 text-xl text-black hover:bg-red-500 hover:cursor-pointer"
               variant="default"
               onClick={() => {
-                fetchUpcomingMovies(item.id).then((res) =>
-                  setMovies(res.results)
-                );
+                setPage(1);
+                setSelectedGenre(item.id);
               }}
             >
               {item.name}
@@ -56,10 +65,28 @@ const Movies = () => {
         </div>
         <div className="md:flex mt-10">
           <div className="flex flex-col justify-center gap-20 h-full w-fit">
-            <h1 className="text-4xl hover:cursor-pointer hover:text-red-500">
+            <h1
+              onClick={() => {
+                setSort("popularity.desc");
+                setPage(1);
+                fetchUpcomingMovies().then((res) => {
+                  setMovies(res.results);
+                });
+              }}
+              className="text-4xl hover:cursor-pointer hover:text-red-500"
+            >
               Trending
             </h1>
-            <h1 className="text-4xl hover:cursor-pointer hover:text-red-500">
+            <h1
+              onClick={() => {
+                setSort("vote_count.desc");
+                setPage(1);
+                fetchUpcomingMovies().then((res) => {
+                  setMovies(res.results);
+                });
+              }}
+              className="text-4xl hover:cursor-pointer hover:text-red-500"
+            >
               Popular
             </h1>
             <h1 className="text-4xl hover:cursor-pointer hover:text-red-500">
@@ -76,16 +103,12 @@ const Movies = () => {
           {pag.map((item) => (
             <p
               onClick={() => {
-                setPage(item);
-                fetchUpcomingMovies(28, item).then((res) =>
-                  setMovies(res.results)
-                );
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                });
+                handlePage(item);
               }}
-              className="text-3xl px-2 w-12 text-center py-1 border-2 border-red-500 rounded-lg hover:cursor-pointer hover:bg-red-500 transition-all"
+              //check if page is active
+              className={`${
+                page === item ? "bg-red-500" : "bg-gray-500"
+              } px-5 py-2 rounded-md hover:cursor-pointer hover:bg-red-500 hover:text-white`}
             >
               {item}
             </p>
