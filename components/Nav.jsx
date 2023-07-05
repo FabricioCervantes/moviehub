@@ -42,7 +42,7 @@ const Nav = () => {
         ></Image>
       </Link>
       <ul className="hidden md:flex gap-20">
-        <Link href="/">
+        <Link href="/movies">
           <div className="text-2xl font-bold">MOVIES</div>
         </Link>
         <Link href="/">
