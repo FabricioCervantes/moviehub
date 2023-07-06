@@ -114,13 +114,12 @@ const Nav = () => {
               )}
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link href="/movies">
                 <div className="text-4xl">MOVIES</div>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              {" "}
               <Link href="/">
                 <div className="text-4xl">TV SHOWS</div>
               </Link>
