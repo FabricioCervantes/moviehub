@@ -70,7 +70,7 @@ const Movies = () => {
       <div className="text-white p-5">
         <div className="flex justify-end gap-5">
           <Select onValueChange={(e) => handleGenre(e)}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px] border-2">
               <SelectValue placeholder="Genre" />
             </SelectTrigger>
             <SelectContent>
@@ -80,7 +80,7 @@ const Movies = () => {
             </SelectContent>
           </Select>
           <Select onValueChange={(e) => handleSort(e)}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px] border-2">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
