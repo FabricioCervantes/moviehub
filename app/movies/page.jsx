@@ -53,8 +53,14 @@ const Movies = () => {
     setPage(item);
     fetchMovies();
   };
-  const test = (value) => {
+  const handleGenre = (value) => {
     setSelectedGenre(value);
+    setPage(1);
+    fetchMovies();
+  };
+
+  const handleSort = (value) => {
+    setSort(value);
     setPage(1);
     fetchMovies();
   };
@@ -62,8 +68,8 @@ const Movies = () => {
   return (
     <>
       <div className="text-white p-5">
-        <div className="flex flex-wrap justify-end gap-5">
-          <Select onValueChange={(e) => test(e)}>
+        <div className="flex justify-end gap-5">
+          <Select onValueChange={(e) => handleGenre(e)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Genre" />
             </SelectTrigger>
@@ -73,37 +79,18 @@ const Movies = () => {
               ))}
             </SelectContent>
           </Select>
+          <Select onValueChange={(e) => handleSort(e)}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="popularity.desc">Trending</SelectItem>
+              <SelectItem value="vote_count.desc">Popular</SelectItem>
+              <SelectItem value="popularity.desc">Top Rated</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        <div className="md:flex mt-10">
-          <div className="flex flex-col justify-center gap-20 h-full w-fit">
-            <h1
-              onClick={() => {
-                setSort("popularity.desc");
-                setPage(1);
-                fetchUpcomingMovies().then((res) => {
-                  setMovies(res.results);
-                });
-              }}
-              className="text-4xl hover:cursor-pointer hover:text-red-500"
-            >
-              Trending
-            </h1>
-            <h1
-              onClick={() => {
-                setSort("vote_count.desc");
-                setPage(1);
-                fetchUpcomingMovies().then((res) => {
-                  setMovies(res.results);
-                });
-              }}
-              className="text-4xl hover:cursor-pointer hover:text-red-500"
-            >
-              Popular
-            </h1>
-            <h1 className="text-4xl hover:cursor-pointer hover:text-red-500">
-              Top Rated
-            </h1>
-          </div>
+        <div className="flex justify-center mt-10">
           <div className="grid md:grid-cols-4 gap-5">
             {movies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
