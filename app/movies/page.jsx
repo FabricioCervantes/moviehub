@@ -4,6 +4,14 @@ import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import MovieCard from "@components/MovieCard";
 import { motion } from "framer-motion";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { set } from "mongoose";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -45,23 +53,26 @@ const Movies = () => {
     setPage(item);
     fetchMovies();
   };
+  const test = (value) => {
+    setSelectedGenre(value);
+    setPage(1);
+    fetchMovies();
+  };
 
   return (
     <>
       <div className="text-white p-5">
-        <div className="flex flex-wrap justify-center gap-5">
-          {genre.map((item) => (
-            <Badge
-              className="bg-red-500 px-6 py-2 text-xl text-black hover:bg-red-500 hover:cursor-pointer"
-              variant="default"
-              onClick={() => {
-                setPage(1);
-                setSelectedGenre(item.id);
-              }}
-            >
-              {item.name}
-            </Badge>
-          ))}
+        <div className="flex flex-wrap justify-end gap-5">
+          <Select onValueChange={(e) => test(e)}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Genre" />
+            </SelectTrigger>
+            <SelectContent>
+              {genre.map((item) => (
+                <SelectItem value={item.id}>{item.name}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <div className="md:flex mt-10">
           <div className="flex flex-col justify-center gap-20 h-full w-fit">
