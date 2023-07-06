@@ -4,11 +4,17 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AiFillLike } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 function MovieCard({ movie }) {
+  const router = useRouter();
+  const handleOnClick = () => {
+    router.push(`/view/?id=${movie.id}`);
+  };
+
   return (
     <div className=" text-white rounded-md w-fit">
-      <motion.div whileHover={{ scale: 1.05 }}>
+      <motion.div onClick={() => handleOnClick()} whileHover={{ scale: 1.05 }}>
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           width={300}
