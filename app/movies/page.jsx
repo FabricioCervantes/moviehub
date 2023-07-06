@@ -86,7 +86,7 @@ const Movies = () => {
             <SelectContent>
               <SelectItem value="popularity.desc">Trending</SelectItem>
               <SelectItem value="vote_count.desc">Popular</SelectItem>
-              <SelectItem value="popularity.desc">Top Rated</SelectItem>
+              <SelectItem value="revenue.desc">Box Office</SelectItem>
             </SelectContent>
           </Select>
         </div>
