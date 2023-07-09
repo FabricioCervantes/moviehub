@@ -112,22 +112,24 @@ const MovieInfo = () => {
     <>
       <div className="flex justify-center">
         <div className="text-white max-w-5xl w-full">
-          <div className="mt-10 flex gap-10">
+          <div className="mt-10 flex p-2 md:p-0 flex-col md:flex-row gap-10">
             <Image
               src={`https://image.tmdb.org/t/p/w500${media.poster_path}`}
               width={0}
               height={0}
               sizes="100vw"
               style={{
-                width: "400px",
+                width: "auto",
                 height: "500px",
                 objectFit: "cover",
               }} // optional
               alt="movie poster"
-              className="rounded-md"
+              className="rounded-m"
             ></Image>
-            <div className="flex flex-col gap-2">
-              <h1 className="text-4xl font-bold">{media.title}</h1>
+            <div className="flex flex-col p-2 gap-2">
+              <h1 className="text-4xl text-center md:text-start font-bold">
+                {media.title}
+              </h1>
               <div className="flex gap-5">
                 {/* Get release date but only the year */}
                 <p>{media.release_date && media.release_date.slice(0, 4)}</p>
@@ -150,14 +152,16 @@ const MovieInfo = () => {
               </div>
               <div className="mt-5">
                 <h1 className="mb-5 font-bold text-xl">Genres</h1>
-                {media.genres &&
-                  media.genres.map((genre) => {
-                    return (
-                      <span className="bg-gray-700 rounded-full px-3 py-1 text-lg font-semibold text-gray-300 mr-2">
-                        {genre.name}
-                      </span>
-                    );
-                  })}
+                <div className="flex gap-5 flex-wrap justify-center md:justify-start">
+                  {media.genres &&
+                    media.genres.map((genre) => {
+                      return (
+                        <span className="bg-gray-700 rounded-full px-3 py-1 text-lg font-semibold text-gray-300 mr-2">
+                          {genre.name}
+                        </span>
+                      );
+                    })}
+                </div>
               </div>
             </div>
           </div>
@@ -175,7 +179,7 @@ const MovieInfo = () => {
           <div className="mt-10 flex gap-10">
             <h1 className="text-4xl font-bold">Images</h1>
           </div>
-          <div className="grid grid-cols-4 gap-5 mt-5">
+          <div className="grid md:grid-cols-4 gap-5 mt-5">
             {images.backdrops &&
               images.backdrops.slice(0, 10).map((image) => {
                 return (
@@ -201,7 +205,7 @@ const MovieInfo = () => {
       <div className="text-white p-5 w-full">
         <h1 className="text-4xl font-bold">Videos</h1>
         <div className="mt-10 flex gap-10 justify-center">
-          <div className="grid grid-cols-4 gap-5 mt-5">
+          <div className="grid md:grid-cols-4 gap-5 mt-5">
             {videos.results &&
               videos.results.slice(0, 10).map((video) => {
                 return (
