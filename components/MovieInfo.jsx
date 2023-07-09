@@ -10,6 +10,7 @@ import {
   BsFillArrowRightCircleFill,
   BsFillStarFill,
 } from "react-icons/bs";
+import { set } from "mongoose";
 
 const EmblaCarousel = ({ actors }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -72,10 +73,12 @@ const MovieInfo = () => {
 
   const [media, setMedia] = useState([]); // [1
   const [credits, setCredits] = useState([]); // [1
+  const [images, setImages] = useState([]); // [1
+  const [videos, setVideos] = useState([]); // [1
 
   const fetchMediaInfo = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/${mediaId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&credits`
+      `https://api.themoviedb.org/3/movie/${mediaId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     ).then((res) => res.json());
   };
   const fetchMediaCredits = () => {
@@ -83,9 +86,26 @@ const MovieInfo = () => {
       `https://api.themoviedb.org/3/movie/${mediaId}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}&credits`
     ).then((res) => res.json());
   };
+
+  // get media images
+  const fetchMediaImages = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${mediaId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+    ).then((res) => res.json());
+  };
+
+  // get media videos
+  const fetchMediaVideos = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${mediaId}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+    ).then((res) => res.json());
+  };
+
   useEffect(() => {
     fetchMediaInfo().then((res) => setMedia(res));
     fetchMediaCredits().then((res) => setCredits(res));
+    fetchMediaImages().then((res) => setImages(res));
+    fetchMediaVideos().then((res) => setVideos(res));
   }, []);
 
   return (
@@ -148,6 +168,55 @@ const MovieInfo = () => {
         {credits.cast && credits.cast.length > 0 && (
           <EmblaCarousel actors={credits.cast} />
         )}
+      </div>
+      {/* Get images of movie */}
+      <div className="p-5 flex justify-center">
+        <div className="text-white w-full">
+          <div className="mt-10 flex gap-10">
+            <h1 className="text-4xl font-bold">Images</h1>
+          </div>
+          <div className="grid grid-cols-4 gap-5 mt-5">
+            {images.backdrops &&
+              images.backdrops.slice(0, 10).map((image) => {
+                return (
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    style={{
+                      width: "300px",
+                      height: "150px",
+                      objectFit: "cover",
+                    }} // optional
+                    alt="movie poster"
+                    className="rounded-md"
+                  ></Image>
+                );
+              })}
+          </div>
+        </div>
+      </div>
+      {/* get videos using video variables */}
+      <div className="text-white p-5 w-full">
+        <h1 className="text-4xl font-bold">Videos</h1>
+        <div className="mt-10 flex gap-10 justify-center">
+          <div className="grid grid-cols-4 gap-5 mt-5">
+            {videos.results &&
+              videos.results.slice(0, 10).map((video) => {
+                return (
+                  <iframe
+                    width="350"
+                    height="200"
+                    src={`https://www.youtube.com/embed/${video.key}`}
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  ></iframe>
+                );
+              })}
+          </div>
+        </div>
       </div>
     </>
   );
