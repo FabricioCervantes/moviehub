@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { set } from "mongoose";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
