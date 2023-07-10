@@ -2,8 +2,9 @@ import MovieInfo from "@components/MovieInfo";
 
 const View = () => {
   return (
-    <div>
-      <MovieInfo />
+    <div className="text-3xl text-white">
+      fuck
+      {/* <MovieInfo /> */}
     </div>
   );
 };
