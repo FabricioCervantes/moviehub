@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 import React, { useEffect, useState, useCallback } from "react";
-// import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useEmblaCarousel from "embla-carousel-react";
 import {
