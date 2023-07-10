@@ -10,9 +10,11 @@ import {
   BsFillArrowRightCircleFill,
   BsFillStarFill,
 } from "react-icons/bs";
-import { set } from "mongoose";
+import { useRouter } from "next/navigation";
 
 const EmblaCarousel = ({ actors }) => {
+  const router = useRouter();
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     slidesToScroll: "auto",
   });
@@ -24,13 +26,21 @@ const EmblaCarousel = ({ actors }) => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
+  const handleActor = (actor) => {
+    router.push(`/person/?id=${actor}`);
+  };
+
   return (
     <div className="w-full">
       <div className="embla">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {actors.map((actor) => (
-              <div className="embla__slide" key={actor.id}>
+              <div
+                className="embla__slide"
+                key={actor.id}
+                onClick={() => handleActor(actor.id)}
+              >
                 <div className="flex flex-col items-center">
                   <Avatar className="h-32 w-32">
                     <AvatarImage
