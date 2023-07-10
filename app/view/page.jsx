@@ -1,7 +1,11 @@
 import MovieInfo from "@components/MovieInfo";
 
 const View = () => {
-  return <MovieInfo />;
+  return (
+    <div>
+      <MovieInfo />
+    </div>
+  );
 };
 
 export default View;
