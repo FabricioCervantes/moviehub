@@ -78,7 +78,7 @@ const EmblaCarousel = ({ actors }) => {
 };
 
 const View = () => {
-  // const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const mediaId = "569094";
 
   const [media, setMedia] = useState([]); // [1
