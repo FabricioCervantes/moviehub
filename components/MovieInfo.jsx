@@ -155,7 +155,11 @@ const MovieInfo = ({ mediaId }) => {
                 {credits.crew &&
                   credits.crew.map((crew) => {
                     if (crew.job === "Director") {
-                      return <p className="font-bold">{crew.name}</p>;
+                      return (
+                        <p key={crew.id} className="font-bold">
+                          {crew.name}
+                        </p>
+                      );
                     }
                   })}
               </div>
@@ -165,7 +169,10 @@ const MovieInfo = ({ mediaId }) => {
                   {media.genres &&
                     media.genres.map((genre) => {
                       return (
-                        <span className="bg-gray-700 rounded-full px-3 py-1 text-lg font-semibold text-gray-300 mr-2">
+                        <span
+                          key={genre.id}
+                          className="bg-gray-700 rounded-full px-3 py-1 text-lg font-semibold text-gray-300 mr-2"
+                        >
                           {genre.name}
                         </span>
                       );
@@ -183,7 +190,7 @@ const MovieInfo = ({ mediaId }) => {
         )}
       </div>
       {/* Get images of movie */}
-      {/* <div className="p-5 flex justify-center">
+      <div className="p-5 flex justify-center">
         <div className="text-white w-full">
           <div className="mt-10 flex gap-10">
             <h1 className="text-4xl font-bold">Images</h1>
@@ -197,6 +204,7 @@ const MovieInfo = ({ mediaId }) => {
                     width={0}
                     height={0}
                     sizes="100vw"
+                    key={image.file_path}
                     style={{
                       width: "300px",
                       height: "150px",
@@ -209,16 +217,17 @@ const MovieInfo = ({ mediaId }) => {
               })}
           </div>
         </div>
-      </div> */}
+      </div>
       {/* get videos using video variables */}
-      {/* <div className="text-white p-5 w-full">
+      <div className="text-white p-5 w-full">
         <h1 className="text-4xl font-bold">Videos</h1>
         <div className="mt-10 flex gap-10 justify-center">
           <div className="grid md:grid-cols-4 gap-5 mt-5">
             {videos.results &&
-              videos.results.slice(0, 10).map((video) => {
+              videos.results.slice(0, 5).map((video) => {
                 return (
                   <iframe
+                    key={video.id}
                     width="350"
                     height="200"
                     src={`https://www.youtube.com/embed/${video.key}`}
@@ -230,7 +239,7 @@ const MovieInfo = ({ mediaId }) => {
               })}
           </div>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
