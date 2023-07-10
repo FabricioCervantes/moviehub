@@ -1,5 +1,4 @@
 "use client";
-import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 import React, { useEffect, useState, useCallback } from "react";
@@ -77,7 +76,7 @@ const EmblaCarousel = ({ actors }) => {
   );
 };
 
-const MovieInfo = () => {
+const MovieInfo = ({ mediaId }) => {
   // const searchParams = useSearchParams();
   // const mediaId = searchParams.get("id");
 
@@ -88,26 +87,26 @@ const MovieInfo = () => {
 
   const fetchMediaInfo = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/447365?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      `https://api.themoviedb.org/3/movie/${mediaId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     ).then((res) => res.json());
   };
   const fetchMediaCredits = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/447365/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}&credits`
+      `https://api.themoviedb.org/3/movie/${mediaId}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}&credits`
     ).then((res) => res.json());
   };
 
   // get media images
   const fetchMediaImages = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/447365/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      `https://api.themoviedb.org/3/movie/${mediaId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     ).then((res) => res.json());
   };
 
   // get media videos
   const fetchMediaVideos = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/447365/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      `https://api.themoviedb.org/3/movie/${mediaId}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     ).then((res) => res.json());
   };
 
