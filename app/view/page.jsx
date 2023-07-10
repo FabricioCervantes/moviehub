@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useEmblaCarousel from "embla-carousel-react";
 import {
@@ -78,8 +78,8 @@ const EmblaCarousel = ({ actors }) => {
 };
 
 const View = () => {
-  const searchParams = useSearchParams();
-  const mediaId = searchParams.get("id");
+  // const searchParams = useSearchParams();
+  const mediaId = "569094";
 
   const [media, setMedia] = useState([]); // [1
   const [credits, setCredits] = useState([]); // [1
