@@ -28,10 +28,6 @@ const Movies = () => {
   };
 
   const fetchUpcomingMovies = () => {
-    console.log("Genre: " + genre);
-    console.log("Sort: " + sort);
-    console.log("Page: " + page);
-
     return fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=${page}&with_genres=${selectedGenre}&sort_by=${sort}`
     ).then((res) => res.json());
@@ -74,7 +70,9 @@ const Movies = () => {
             </SelectTrigger>
             <SelectContent>
               {genre.map((item) => (
-                <SelectItem value={item.id}>{item.name}</SelectItem>
+                <SelectItem key={item.id} value={item.id}>
+                  {item.name}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -92,13 +90,16 @@ const Movies = () => {
         <div className="flex justify-center mt-10">
           <div className="grid md:grid-cols-4 gap-5">
             {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
+              <div key={movie.id}>
+                <MovieCard movie={movie} />
+              </div>
             ))}
           </div>
         </div>
         <div className="flex justify-end gap-5 p-2 mt-5">
           {pag.map((item) => (
             <p
+              key={item}
               onClick={() => {
                 handlePage(item);
                 window.scrollTo({

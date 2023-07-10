@@ -183,7 +183,7 @@ const MovieInfo = ({ mediaId }) => {
         )}
       </div>
       {/* Get images of movie */}
-      <div className="p-5 flex justify-center">
+      {/* <div className="p-5 flex justify-center">
         <div className="text-white w-full">
           <div className="mt-10 flex gap-10">
             <h1 className="text-4xl font-bold">Images</h1>
@@ -209,9 +209,9 @@ const MovieInfo = ({ mediaId }) => {
               })}
           </div>
         </div>
-      </div>
+      </div> */}
       {/* get videos using video variables */}
-      <div className="text-white p-5 w-full">
+      {/* <div className="text-white p-5 w-full">
         <h1 className="text-4xl font-bold">Videos</h1>
         <div className="mt-10 flex gap-10 justify-center">
           <div className="grid md:grid-cols-4 gap-5 mt-5">
@@ -223,14 +223,14 @@ const MovieInfo = ({ mediaId }) => {
                     height="200"
                     src={`https://www.youtube.com/embed/${video.key}`}
                     title="YouTube video player"
-                    frameborder="0"
+                    frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   ></iframe>
                 );
               })}
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

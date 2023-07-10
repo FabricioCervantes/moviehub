@@ -22,8 +22,8 @@ const EmblaCarousel = ({ movies }) => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container gap-16">
           {movies.map((movie) => (
-            <div>
-              <MovieCard key={movie.id} movie={movie} />
+            <div key={movie}>
+              <MovieCard movie={movie} />
             </div>
           ))}
         </div>
