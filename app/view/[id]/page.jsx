@@ -2,7 +2,6 @@
 import Image from "next/image";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useEmblaCarousel from "embla-carousel-react";
 import {
@@ -77,20 +76,14 @@ const EmblaCarousel = ({ actors }) => {
   );
 };
 
-const View = () => {
-  const searchParams = useSearchParams();
-  const mediaId = "569094";
+const View = ({ params }) => {
+  const mediaId = params?.id;
 
   const [media, setMedia] = useState([]); // [1
   const [credits, setCredits] = useState([]); // [1
   const [images, setImages] = useState([]); // [1
   const [videos, setVideos] = useState([]); // [1
 
-  const fetchMediaInfo = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/movie/${mediaId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    ).then((res) => res.json());
-  };
   const fetchMediaCredits = () => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${mediaId}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}&credits`
@@ -110,9 +103,15 @@ const View = () => {
       `https://api.themoviedb.org/3/movie/${mediaId}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     ).then((res) => res.json());
   };
+  const getMovieDetails = async () => {
+    const res = await fetch(`/api/view/${mediaId}/`);
+    const data = await res.json();
+    console.log(data);
+    setMedia(data);
+  };
 
   useEffect(() => {
-    fetchMediaInfo().then((res) => setMedia(res));
+    getMovieDetails();
     fetchMediaCredits().then((res) => setCredits(res));
     fetchMediaImages().then((res) => setImages(res));
     fetchMediaVideos().then((res) => setVideos(res));
@@ -191,7 +190,7 @@ const View = () => {
         )}
       </div>
       {/* Get images of movie */}
-      <div className="p-5 flex justify-center">
+      {/* <div className="p-5 flex justify-center">
         <div className="text-white w-full">
           <div className="mt-10 flex gap-10">
             <h1 className="text-4xl font-bold">Images</h1>
@@ -218,9 +217,9 @@ const View = () => {
               })}
           </div>
         </div>
-      </div>
+      </div> */}
       {/* get videos using video variables */}
-      <div className="text-white p-5 w-full">
+      {/* <div className="text-white p-5 w-full">
         <h1 className="text-4xl font-bold">Videos</h1>
         <div className="mt-10 flex gap-10 justify-center">
           <div className="grid md:grid-cols-4 gap-5 mt-5">
@@ -240,7 +239,7 @@ const View = () => {
               })}
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

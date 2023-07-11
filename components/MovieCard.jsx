@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 
 function MovieCard({ movie }) {
   const router = useRouter();
+
   const handleOnClick = () => {
-    router.push(`/view/?id=${movie.id}`);
+    router.push(`/view/${movie.id}`);
   };
 
   return (
