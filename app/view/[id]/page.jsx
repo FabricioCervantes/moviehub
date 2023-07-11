@@ -84,37 +84,17 @@ const View = ({ params }) => {
   const [images, setImages] = useState([]); // [1
   const [videos, setVideos] = useState([]); // [1
 
-  const fetchMediaCredits = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/movie/${mediaId}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}&credits`
-    ).then((res) => res.json());
-  };
-
-  // get media images
-  const fetchMediaImages = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/movie/${mediaId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    ).then((res) => res.json());
-  };
-
-  // get media videos
-  const fetchMediaVideos = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/movie/${mediaId}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    ).then((res) => res.json());
-  };
   const getMovieDetails = async () => {
     const res = await fetch(`/api/view/${mediaId}/`);
     const data = await res.json();
-    console.log(data);
     setMedia(data);
+    setCredits(data.credits);
+    setImages(data.images);
+    setVideos(data.videos);
   };
 
   useEffect(() => {
     getMovieDetails();
-    fetchMediaCredits().then((res) => setCredits(res));
-    fetchMediaImages().then((res) => setImages(res));
-    fetchMediaVideos().then((res) => setVideos(res));
   }, []);
 
   return (
@@ -190,7 +170,7 @@ const View = ({ params }) => {
         )}
       </div>
       {/* Get images of movie */}
-      {/* <div className="p-5 flex justify-center">
+      <div className="p-5 flex justify-center">
         <div className="text-white w-full">
           <div className="mt-10 flex gap-10">
             <h1 className="text-4xl font-bold">Images</h1>
@@ -217,9 +197,9 @@ const View = ({ params }) => {
               })}
           </div>
         </div>
-      </div> */}
+      </div>
       {/* get videos using video variables */}
-      {/* <div className="text-white p-5 w-full">
+      <div className="text-white p-5 w-full">
         <h1 className="text-4xl font-bold">Videos</h1>
         <div className="mt-10 flex gap-10 justify-center">
           <div className="grid md:grid-cols-4 gap-5 mt-5">
@@ -239,7 +219,7 @@ const View = ({ params }) => {
               })}
           </div>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
