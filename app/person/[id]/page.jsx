@@ -1,19 +1,25 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PersonProfile from "@components/PersonProfile";
 
-const Person = async ({ params }) => {
-  const personId = params?.id;
+const page = ({ params }) => {
+  const [profile, setProfile] = useState(0);
 
-  const res = await fetch(`/api/person/${personId}/`);
-  const data = await res.json();
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch(`/api/person/${params.id}/`);
+      const data = await res.json();
+      setProfile(data);
+    };
+    getData();
+  }, [profile]);
 
   return (
     <div>
-      <PersonProfile profile={data} />
+      <PersonProfile person={profile} />
     </div>
   );
 };
 
-export default Person;
+export default page;

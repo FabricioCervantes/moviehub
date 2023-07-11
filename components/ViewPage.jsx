@@ -77,23 +77,7 @@ const EmblaCarousel = ({ actors }) => {
   );
 };
 
-const ViewPage = ({ movie }) => {
-  const [media, setMedia] = useState([]); // [1
-  const [credits, setCredits] = useState([]); // [1
-  const [images, setImages] = useState([]); // [1
-  const [videos, setVideos] = useState([]); // [1
-
-  const getMovieDetails = () => {
-    setMedia(movie);
-    setCredits(movie.credits);
-    setImages(movie.images);
-    setVideos(movie.videos);
-  };
-
-  useEffect(() => {
-    getMovieDetails();
-  }, []);
-
+const ViewPage = ({ media }) => {
   return (
     <>
       <div className="flex justify-center">
@@ -129,16 +113,16 @@ const ViewPage = ({ movie }) => {
               <p className="text-justify mt-5">{media.overview}</p>
               <p>Director</p>
               <div className="flex gap-5">
-                {credits.crew &&
-                  credits.crew.map((crew) => {
-                    if (crew.job === "Director") {
+                {media.credits &&
+                  media.credits.crew
+                    .filter((crew) => crew.job === "Director")
+                    .map((director) => {
                       return (
-                        <p key={crew.id} className="font-bold">
-                          {crew.name}
+                        <p key={director.id} className="text-lg">
+                          {director.name}
                         </p>
                       );
-                    }
-                  })}
+                    })}
               </div>
               <div className="mt-5">
                 <h1 className="mb-5 font-bold text-xl">Genres</h1>
@@ -162,8 +146,8 @@ const ViewPage = ({ movie }) => {
       </div>
       {/* <p className="text-4xl text-white px-5">Cast</p> */}
       <div className="flex justify-between p-5 mt-10 text-white">
-        {credits.cast && credits.cast.length > 0 && (
-          <EmblaCarousel actors={credits.cast} />
+        {media.credits && media.credits.cast.length > 0 && (
+          <EmblaCarousel actors={media.credits.cast} />
         )}
       </div>
       {/* Get images of movie */}
@@ -173,8 +157,8 @@ const ViewPage = ({ movie }) => {
             <h1 className="text-4xl font-bold">Images</h1>
           </div>
           <div className="grid md:grid-cols-4 gap-5 mt-5">
-            {images.backdrops &&
-              images.backdrops.slice(0, 10).map((image) => {
+            {media.images &&
+              media.images.backdrops.slice(0, 10).map((image) => {
                 return (
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
@@ -200,8 +184,8 @@ const ViewPage = ({ movie }) => {
         <h1 className="text-4xl font-bold">Videos</h1>
         <div className="mt-10 flex gap-10 justify-center">
           <div className="grid md:grid-cols-4 gap-5 mt-5">
-            {videos.results &&
-              videos.results.slice(0, 5).map((video) => {
+            {media.videos &&
+              media.videos.results.slice(0, 5).map((video) => {
                 return (
                   <iframe
                     key={video.id}

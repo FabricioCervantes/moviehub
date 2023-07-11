@@ -1,16 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import ViewPage from "@components/ViewPage";
 
-const View = async ({ params }) => {
-  const mediaId = params?.id;
+const View = ({ params: { id } }) => {
+  const mediaId = id;
 
-  const res = await fetch(`/api/view/${mediaId}/`);
-  const data = await res.json();
+  const [movie, setMovie] = useState([]);
 
-  return <ViewPage movie={data} />;
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch(`/api/view/${mediaId}/`);
+      const data = await res.json();
+      setMovie(data);
+    };
+    getData();
+  }, [movie]);
+
+  return (
+    <div>
+      <ViewPage media={movie} />
+    </div>
+  );
 };
 
 export default View;

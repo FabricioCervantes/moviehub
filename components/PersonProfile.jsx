@@ -3,22 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-const PersonProfile = ({ profile }) => {
-  //get actor info
-  const [person, setPerson] = useState([]);
-  const [personImages, setPersonImages] = useState([]);
-  const [personMovies, setPersonMovies] = useState([]);
-
-  const getPersonDetails = () => {
-    setPerson(profile);
-    setPersonImages(profile.images);
-    setPersonMovies(profile.movies);
-  };
-
-  useEffect(() => {
-    getPersonDetails();
-  }, []);
-
+const PersonProfile = ({ person }) => {
+  console.log(person);
   return (
     <>
       <div className="flex justify-center">
@@ -77,21 +63,22 @@ const PersonProfile = ({ profile }) => {
             Images
           </h1>
           <div className="grid md:grid-cols-4 justify-center gap-5">
-            {personImages.profiles?.slice(0, 5).map((image) => (
-              <Image
-                src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{
-                  width: "auto",
-                  height: "500px",
-                  objectFit: "cover",
-                }} // optional
-                alt={person.name}
-                className="rounded-lg"
-              />
-            ))}
+            {person.images &&
+              person.images.profiles?.slice(0, 5).map((image) => (
+                <Image
+                  src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{
+                    width: "auto",
+                    height: "500px",
+                    objectFit: "cover",
+                  }} // optional
+                  alt={person.name}
+                  className="rounded-lg"
+                />
+              ))}
           </div>
         </div>
       </div>
@@ -102,35 +89,38 @@ const PersonProfile = ({ profile }) => {
             Movies
           </h1>
           <div className="grid md:grid-cols-4 justify-center gap-5">
-            {personMovies.cast
-              ?.sort((a, b) => b.popularity - a.popularity)
-              .slice(0, 10)
-              .map((movie) => (
-                <div>
-                  <Image
-                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    style={{
-                      width: "300px",
-                      height: "350px",
-                      objectFit: "cover",
-                    }} // optional
-                    alt={person.name}
-                    className="rounded-lg"
-                  />
-                  <div className="flex flex-col gap-1 mt-3">
-                    <p className="text-white font-bold text-center">
-                      {movie.title}
-                    </p>
-                    <p className="text-white text-center">{movie.character}</p>
-                    <p className="text-white text-center">
-                      {movie.release_date?.slice(0, 4)}
-                    </p>
+            {person.movies &&
+              person.movies.cast
+                ?.sort((a, b) => b.popularity - a.popularity)
+                .slice(0, 10)
+                .map((movie) => (
+                  <div>
+                    <Image
+                      src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      style={{
+                        width: "300px",
+                        height: "350px",
+                        objectFit: "cover",
+                      }} // optional
+                      alt={person.name}
+                      className="rounded-lg"
+                    />
+                    <div className="flex flex-col gap-1 mt-3">
+                      <p className="text-white font-bold text-center">
+                        {movie.title}
+                      </p>
+                      <p className="text-white text-center">
+                        {movie.character}
+                      </p>
+                      <p className="text-white text-center">
+                        {movie.release_date?.slice(0, 4)}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
           </div>
         </div>
       </div>
