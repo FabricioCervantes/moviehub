@@ -4,9 +4,8 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 
-const PersonProfile = () => {
-  const searchParams = useSearchParams();
-  const mediaId = searchParams.get("id");
+const PersonProfile = ({ id }) => {
+  const mediaId = id;
 
   //get actor info
   const [person, setPerson] = useState([]);

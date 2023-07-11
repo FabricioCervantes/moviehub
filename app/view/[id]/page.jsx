@@ -26,7 +26,7 @@ const EmblaCarousel = ({ actors }) => {
   }, [emblaApi]);
 
   const handleActor = (actor) => {
-    router.push(`/person/?id=${actor}`);
+    router.push(`/person/${actor}`);
   };
 
   return (
