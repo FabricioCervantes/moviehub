@@ -23,7 +23,4 @@ export const GET = async (request, { params }) => {
   } catch (error) {
     return new Response(JSON.stringify(error), { status: 500 });
   }
-  //   return fetch(
-  //     `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-  //   )
 };

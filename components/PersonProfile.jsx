@@ -1,42 +1,23 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-const PersonProfile = ({ id }) => {
-  const mediaId = id;
-
+const PersonProfile = ({ profile }) => {
   //get actor info
   const [person, setPerson] = useState([]);
   const [personImages, setPersonImages] = useState([]);
   const [personMovies, setPersonMovies] = useState([]);
 
-  const fetchPerson = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/person/${mediaId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    ).then((res) => res.json());
-  };
-
-  const fetchPersonImages = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/person/${mediaId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    ).then((res) => res.json());
-  };
-
-  const fetchPersonMovies = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/person/${mediaId}/movie_credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    ).then((res) => res.json());
+  const getPersonDetails = () => {
+    setPerson(profile);
+    setPersonImages(profile.images);
+    setPersonMovies(profile.movies);
   };
 
   useEffect(() => {
-    fetchPerson().then((res) => setPerson(res));
-    fetchPersonImages().then((res) => setPersonImages(res));
-    fetchPersonMovies().then((res) => setPersonMovies(res));
+    getPersonDetails();
   }, []);
-
-  console.log(person);
 
   return (
     <>

@@ -1,12 +1,17 @@
+"use client";
+
 import React from "react";
 import PersonProfile from "@components/PersonProfile";
 
-const Person = ({ params }) => {
+const Person = async ({ params }) => {
   const personId = params?.id;
+
+  const res = await fetch(`/api/person/${personId}/`);
+  const data = await res.json();
 
   return (
     <div>
-      <PersonProfile id={personId} />
+      <PersonProfile profile={data} />
     </div>
   );
 };
