@@ -97,7 +97,7 @@ const PersonProfile = ({ person }) => {
                 .slice(0, 10)
                 .map((movie) => (
                   <div key={movie.id}>
-                    <MovieCard movie={movie} />
+                    <MovieCard movie={movie} type="movie" />
                   </div>
                 ))}
           </div>

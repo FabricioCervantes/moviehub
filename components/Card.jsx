@@ -10,7 +10,7 @@ function MovieCard({ movie, type }) {
   const router = useRouter();
 
   const handleOnClick = () => {
-    if (type === "movie") router.push(`/view/${movie.id}`);
+    if (type === "movie") router.push(`/movies/${movie.id}`);
     else router.push(`/tv/${movie.id}`);
   };
 
