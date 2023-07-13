@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import MovieCard from "./MovieCard";
 
 const PersonProfile = ({ person }) => {
-  console.log(person);
   return (
     <>
       <div className="flex justify-center">
@@ -21,7 +21,7 @@ const PersonProfile = ({ person }) => {
                   height: "500px",
                   objectFit: "cover",
                 }} // optional
-                alt={person.name}
+                alt="person image"
                 className="rounded-lg"
               />
               <div className="flex flex-col gap-1 mt-5">
@@ -65,19 +65,21 @@ const PersonProfile = ({ person }) => {
           <div className="grid md:grid-cols-4 justify-center gap-5">
             {person.images &&
               person.images.profiles?.slice(0, 5).map((image) => (
-                <Image
-                  src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  style={{
-                    width: "auto",
-                    height: "500px",
-                    objectFit: "cover",
-                  }} // optional
-                  alt={person.name}
-                  className="rounded-lg"
-                />
+                <div key={image.file_path}>
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    style={{
+                      width: "auto",
+                      height: "500px",
+                      objectFit: "cover",
+                    }} // optional
+                    alt="person image"
+                    className="rounded-lg"
+                  />
+                </div>
               ))}
           </div>
         </div>
@@ -94,31 +96,8 @@ const PersonProfile = ({ person }) => {
                 ?.sort((a, b) => b.popularity - a.popularity)
                 .slice(0, 10)
                 .map((movie) => (
-                  <div>
-                    <Image
-                      src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                      style={{
-                        width: "300px",
-                        height: "350px",
-                        objectFit: "cover",
-                      }} // optional
-                      alt={person.name}
-                      className="rounded-lg"
-                    />
-                    <div className="flex flex-col gap-1 mt-3">
-                      <p className="text-white font-bold text-center">
-                        {movie.title}
-                      </p>
-                      <p className="text-white text-center">
-                        {movie.character}
-                      </p>
-                      <p className="text-white text-center">
-                        {movie.release_date?.slice(0, 4)}
-                      </p>
-                    </div>
+                  <div key={movie.id}>
+                    <MovieCard movie={movie} />
                   </div>
                 ))}
           </div>
