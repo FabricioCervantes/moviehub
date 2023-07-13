@@ -1,9 +1,6 @@
 "use client";
-
+import DisplayMedia from "@components/DisplayMedia";
 import { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import MovieCard from "@components/MovieCard";
-import { motion } from "framer-motion";
 import {
   Select,
   SelectContent,
@@ -40,10 +37,6 @@ const Movies = () => {
     setGenre(test.genres);
   };
 
-  useEffect(() => {
-    fetchMovies();
-  }, [sort, page, selectedGenre]);
-
   const handlePage = (item) => {
     setPage(item);
     fetchMovies();
@@ -60,63 +53,37 @@ const Movies = () => {
     fetchMovies();
   };
 
+  useEffect(() => {
+    fetchMovies();
+  }, [sort, page, selectedGenre]);
+
   return (
     <>
-      <div className="text-white p-5">
-        <div className="flex justify-end gap-5">
-          <Select onValueChange={(e) => handleGenre(e)}>
-            <SelectTrigger className="w-[180px] border-2">
-              <SelectValue placeholder="Genre" />
-            </SelectTrigger>
-            <SelectContent>
-              {genre.map((item) => (
-                <SelectItem key={item.id} value={item.id}>
-                  {item.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select onValueChange={(e) => handleSort(e)}>
-            <SelectTrigger className="w-[180px] border-2">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="popularity.desc">Trending</SelectItem>
-              <SelectItem value="vote_count.desc">Popular</SelectItem>
-              <SelectItem value="revenue.desc">Box Office</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex justify-center mt-10">
-          <div className="grid md:grid-cols-4 gap-5">
-            {movies.map((movie) => (
-              <div key={movie.id}>
-                <MovieCard movie={movie} />
-              </div>
+      <div className="flex justify-end gap-5">
+        <Select onValueChange={(e) => handleGenre(e)}>
+          <SelectTrigger className="w-[180px] border-2">
+            <SelectValue placeholder="Genre" />
+          </SelectTrigger>
+          <SelectContent>
+            {genre.map((item) => (
+              <SelectItem key={item.id} value={item.id}>
+                {item.name}
+              </SelectItem>
             ))}
-          </div>
-        </div>
-        <div className="flex justify-end gap-5 p-2 mt-5">
-          {pag.map((item) => (
-            <p
-              key={item}
-              onClick={() => {
-                handlePage(item);
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                });
-              }}
-              //check if page is active
-              className={`${
-                page === item ? "bg-red-500" : "bg-gray-500"
-              } px-5 py-2 rounded-md hover:cursor-pointer hover:bg-red-500 hover:text-white`}
-            >
-              {item}
-            </p>
-          ))}
-        </div>
+          </SelectContent>
+        </Select>
+        <Select onValueChange={(e) => handleSort(e)}>
+          <SelectTrigger className="w-[180px] border-2">
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="popularity.desc">Trending</SelectItem>
+            <SelectItem value="vote_count.desc">Popular</SelectItem>
+            <SelectItem value="revenue.desc">Box Office</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
+      <DisplayMedia movies={movies} />
     </>
   );
 };
