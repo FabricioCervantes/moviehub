@@ -37,7 +37,7 @@ const EmblaCarousel = ({ actors }) => {
           <div className="embla__container">
             {actors.map((actor) => (
               <div
-                className="embla__slide"
+                className="embla__slide hover:cursor-pointer"
                 key={actor.id}
                 onClick={() => handleActor(actor.id)}
               >
