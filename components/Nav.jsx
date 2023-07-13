@@ -45,7 +45,7 @@ const Nav = () => {
         <Link href="/movies">
           <div className="text-2xl font-bold">MOVIES</div>
         </Link>
-        <Link href="/">
+        <Link href="/tv">
           <div className="text-2xl font-bold">TV SHOWS</div>
         </Link>
         <Link href="/">
@@ -120,7 +120,7 @@ const Nav = () => {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href="/">
+              <Link href="/tv">
                 <div className="text-4xl">TV SHOWS</div>
               </Link>
             </DropdownMenuItem>

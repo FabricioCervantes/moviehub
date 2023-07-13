@@ -6,11 +6,12 @@ import { motion } from "framer-motion";
 import { AiFillLike } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, type }) {
   const router = useRouter();
 
   const handleOnClick = () => {
-    router.push(`/view/${movie.id}`);
+    if (type === "movie") router.push(`/view/${movie.id}`);
+    else router.push(`/tv/${movie.id}`);
   };
 
   return (

@@ -6,7 +6,7 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
-import MovieCard from "@components/MovieCard";
+import MovieCard from "@components/Card";
 
 const EmblaCarousel = ({ movies }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ slidesToScroll: "auto" });

@@ -59,7 +59,7 @@ const Movies = () => {
 
   return (
     <>
-      <div className="flex justify-end gap-5">
+      <div className="flex text-white px-5 justify-end gap-5">
         <Select onValueChange={(e) => handleGenre(e)}>
           <SelectTrigger className="w-[180px] border-2">
             <SelectValue placeholder="Genre" />
@@ -83,7 +83,27 @@ const Movies = () => {
           </SelectContent>
         </Select>
       </div>
-      <DisplayMedia movies={movies} />
+      <DisplayMedia media={movies} type="movie" />
+      <div className="flex justify-end gap-5 p-2 mt-5">
+        {pag.map((item) => (
+          <p
+            key={item}
+            onClick={() => {
+              handlePage(item);
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+            //check if page is active
+            className={`${
+              page === item ? "bg-red-500" : "bg-gray-500"
+            } px-5 py-2 rounded-md hover:cursor-pointer hover:bg-red-500 hover:text-white`}
+          >
+            {item}
+          </p>
+        ))}
+      </div>
     </>
   );
 };

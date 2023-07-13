@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import MovieCard from "./MovieCard";
+import MovieCard from "./Card";
 
 const PersonProfile = ({ person }) => {
   return (
