@@ -14,7 +14,7 @@ function MovieCard({ movie }) {
   };
 
   return (
-    <div className=" text-white rounded-md w-fit">
+    <div className=" text-white rounded-md w-fit hover:cursor-pointer">
       <motion.div onClick={() => handleOnClick()} whileHover={{ scale: 1.05 }}>
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
