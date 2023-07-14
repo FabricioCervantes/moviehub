@@ -78,6 +78,7 @@ const EmblaCarousel = ({ actors }) => {
 };
 
 const ViewPage = ({ media }) => {
+  console.log(media);
   return (
     <>
       <div className="flex justify-center">
@@ -98,7 +99,7 @@ const ViewPage = ({ media }) => {
             ></Image>
             <div className="flex flex-col p-2 gap-2">
               <h1 className="text-4xl text-center md:text-start font-bold">
-                {media.title}
+                {media.title || media.name}
               </h1>
               <div className="flex gap-5">
                 {/* Get release date but only the year */}
@@ -149,6 +150,46 @@ const ViewPage = ({ media }) => {
         {media.credits && media.credits.cast.length > 0 && (
           <EmblaCarousel actors={media.credits.cast} />
         )}
+      </div>
+      <div className="grid md:grid-cols-4">
+        {media.seasons &&
+          media.seasons.map((season) => {
+            return (
+              <div className="flex justify-center">
+                <div className="text-white w-full">
+                  <div className="mt-10 flex p-2 md:p-0 flex-col md:flex-row gap-10">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w500${season.poster_path}`}
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      style={{
+                        width: "auto",
+                        height: "500px",
+                        objectFit: "cover",
+                      }} // optional
+                      alt="movie poster"
+                      className="rounded-m"
+                    ></Image>
+                    {/* <div className="flex flex-col p-2 gap-2">
+                      <h1 className="text-4xl text-center md:text-start font-bold">
+                        {season.name}
+                      </h1>
+                      <div className="flex gap-5">
+                        <p>{season.air_date.slice(0, 4)}</p>
+                        <p>{season.episode_count} episodes</p>
+                        <p className="flex items-center gap-2">
+                          <BsFillStarFill className="text-yellow-500" />
+                          {Math.round(season.vote_average * 10) / 10} / 10
+                        </p>
+                      </div>
+                      <p className="text-lg">{season.overview}</p>
+                    </div> */}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
       </div>
       {/* Get images of movie */}
       <div className="p-5 flex justify-center">
