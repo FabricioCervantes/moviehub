@@ -151,9 +151,9 @@ const ViewPage = ({ media }) => {
           <EmblaCarousel actors={media.credits.cast} />
         )}
       </div>
-      <div className="grid md:grid-cols-4">
-        {media.seasons &&
-          media.seasons.map((season) => {
+      <div className="">
+        {media.seasonsInfo &&
+          media.seasonsInfo.map((season) => {
             return (
               <div className="flex justify-center">
                 <div className="text-white w-full">
@@ -171,7 +171,7 @@ const ViewPage = ({ media }) => {
                       alt="movie poster"
                       className="rounded-m"
                     ></Image>
-                    {/* <div className="flex flex-col p-2 gap-2">
+                    <div className="flex flex-col p-2 gap-2">
                       <h1 className="text-4xl text-center md:text-start font-bold">
                         {season.name}
                       </h1>
@@ -184,7 +184,31 @@ const ViewPage = ({ media }) => {
                         </p>
                       </div>
                       <p className="text-lg">{season.overview}</p>
-                    </div> */}
+                      <div className="grid grid-cols-4 pt-5">
+                        {season.episodes.map((episode) => {
+                          return (
+                            <>
+                              <div>
+                                <Image
+                                  src={`https://image.tmdb.org/t/p/w500${episode.still_path}`}
+                                  width={0}
+                                  height={0}
+                                  sizes="100vw"
+                                  style={{
+                                    width: "100px",
+                                    height: "100px",
+                                    objectFit: "cover",
+                                  }} // optional
+                                  alt="movie poster"
+                                  className="rounded-m"
+                                ></Image>
+                                <div>{episode.name}</div>
+                              </div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
