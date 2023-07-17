@@ -11,14 +11,12 @@ import {
 } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Carousel from "@components/Carousel";
 
 const EmblaCarousel = ({ actors }) => {
   const router = useRouter();
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    slidesToScroll: "auto",
-  });
-
+  const [emblaRef, emblaApi] = useEmblaCarousel({ slidesToScroll: "auto" });
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
@@ -31,47 +29,49 @@ const EmblaCarousel = ({ actors }) => {
   };
 
   return (
-    <div className="w-full">
-      <div className="embla">
-        <div className="embla__viewport" ref={emblaRef}>
-          <div className="embla__container">
-            {actors.map((actor) => (
-              <div
-                className="embla__slide hover:cursor-pointer"
-                key={actor.id}
-                onClick={() => handleActor(actor.id)}
-              >
-                <div className="flex flex-col items-center">
-                  <Avatar className="h-32 w-32">
-                    <AvatarImage
-                      className="object-cover"
-                      src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-                    />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-bold text-center">{actor.name}</p>
-                    <p className="w-40 text-center">{actor.character}</p>
-                  </div>
+    <div className="embla text-white relative">
+      <div className="embla__viewport" ref={emblaRef}>
+        <div className="embla__container auto-cols-[100%] md:auto-cols-[20%]">
+          {actors.map((actor) => (
+            <div
+              className="embla__slide hover:cursor-pointer"
+              key={actor.id}
+              onClick={() => handleActor(actor.id)}
+            >
+              <div className="flex flex-col items-center">
+                <Avatar className="h-32 w-32">
+                  <AvatarImage
+                    className="object-cover"
+                    src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-bold text-center">{actor.name}</p>
+                  <p className="w-40 text-center">{actor.character}</p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="hidden md:flex justify-between p-2">
-        <button
-          className="absolute top-[770px] embla_right text-white text-4xl"
-          onClick={scrollNext}
-        >
-          <BsFillArrowRightCircleFill />
-        </button>
-        <button
-          className=" text-white absolute top-[770px] text-4xl"
-          onClick={scrollPrev}
-        >
-          <BsFillArrowLeftCircleFill />
-        </button>
+      <div className="hidden md:flex text-4xl absolute inset-y-2/4 w-full justify-between">
+        <div className="flex">
+          <button
+            className="transform -translate-y-1/2  -translate-x-3/4"
+            onClick={scrollPrev}
+          >
+            <BsFillArrowLeftCircleFill />
+          </button>
+        </div>
+        <div className="flex">
+          <button
+            className="transform -translate-y-1/2 -translate-x-3/4"
+            onClick={scrollNext}
+          >
+            <BsFillArrowRightCircleFill />
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -146,7 +146,7 @@ const ViewPage = ({ media }) => {
         </div>
       </div>
       {/* <p className="text-4xl text-white px-5">Cast</p> */}
-      <div className="flex justify-between p-5 mt-10 text-white">
+      <div className="p-5">
         {media.credits && media.credits.cast.length > 0 && (
           <EmblaCarousel actors={media.credits.cast} />
         )}

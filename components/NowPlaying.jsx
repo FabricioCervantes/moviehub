@@ -7,6 +7,7 @@ import {
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
 import MovieCard from "@components/Card";
+import Carousel from "@components/Carousel";
 
 const EmblaCarousel = ({ movies }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ slidesToScroll: "auto" });
@@ -48,8 +49,8 @@ const EmblaCarousel = ({ movies }) => {
 
 const NowPlaying = ({ movies }) => {
   return (
-    <div>
-      <EmblaCarousel movies={movies} />
+    <div className="p-5">
+      <Carousel movies={movies} />
     </div>
   );
 };
