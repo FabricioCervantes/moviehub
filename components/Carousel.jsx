@@ -8,8 +8,9 @@ import {
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
 import MovieCard from "@components/Card";
+import Image from "next/image";
 
-const Carousel = ({ movies }) => {
+const Carousel = ({ data, type }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ slidesToScroll: "auto" });
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -22,11 +23,28 @@ const Carousel = ({ movies }) => {
     <div className="embla text-white relative">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container auto-cols-[100%] md:auto-cols-[25%]">
-          {movies.map((index) => (
-            <div className="embla__slide" key={index.id}>
-              <MovieCard movie={index} type="movie" />
-            </div>
-          ))}
+          {type === "movie_poster" &&
+            data.map((index) => (
+              <div className="embla__slide" key={index.id}>
+                <MovieCard movie={index} type="movie" />
+              </div>
+            ))}
+          {type === "person_images" &&
+            data.map((index) => (
+              <Image
+                src={`https://image.tmdb.org/t/p/original/${index.file_path}`}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{
+                  width: "auto",
+                  height: "450px",
+                  objectFit: "cover",
+                }} // optional
+                alt="person image"
+                className="rounded-lg"
+              />
+            ))}
         </div>
       </div>
       <div className="hidden md:flex text-4xl absolute inset-y-2/4 w-full justify-between">

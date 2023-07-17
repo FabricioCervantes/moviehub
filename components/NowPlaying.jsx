@@ -50,7 +50,7 @@ const EmblaCarousel = ({ movies }) => {
 const NowPlaying = ({ movies }) => {
   return (
     <div className="p-5">
-      <Carousel movies={movies} />
+      <Carousel data={movies} type="movie_poster" />
     </div>
   );
 };

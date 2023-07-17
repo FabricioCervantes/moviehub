@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import MovieCard from "./Card";
+import Carousel from "./Carousel";
 
 const PersonProfile = ({ person }) => {
   return (
@@ -62,25 +63,10 @@ const PersonProfile = ({ person }) => {
           <h1 className="text-4xl font-bold text-center text-white md:text-left">
             Images
           </h1>
-          <div className="grid md:grid-cols-4 justify-center gap-5">
-            {person.images &&
-              person.images.profiles?.slice(0, 5).map((image) => (
-                <div key={image.file_path}>
-                  <Image
-                    src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    style={{
-                      width: "auto",
-                      height: "500px",
-                      objectFit: "cover",
-                    }} // optional
-                    alt="person image"
-                    className="rounded-lg"
-                  />
-                </div>
-              ))}
+          <div className="">
+            {person.images && (
+              <Carousel data={person.images.profiles} type="person_images" />
+            )}
           </div>
         </div>
       </div>
@@ -90,16 +76,10 @@ const PersonProfile = ({ person }) => {
           <h1 className="text-4xl font-bold text-center text-white md:text-left">
             Movies
           </h1>
-          <div className="grid md:grid-cols-4 justify-center gap-5">
-            {person.movies &&
-              person.movies.cast
-                ?.sort((a, b) => b.popularity - a.popularity)
-                .slice(0, 10)
-                .map((movie) => (
-                  <div key={movie.id}>
-                    <MovieCard movie={movie} type="movie" />
-                  </div>
-                ))}
+          <div className="">
+            {person.movies && (
+              <Carousel data={person.movies.cast} type="movie_poster" />
+            )}
           </div>
         </div>
       </div>
