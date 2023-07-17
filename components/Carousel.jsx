@@ -45,6 +45,23 @@ const Carousel = ({ data, type }) => {
                 className="rounded-lg"
               />
             ))}
+          {type === "media_images" &&
+            data.map((index) => (
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${index.file_path}`}
+                width={0}
+                height={0}
+                sizes="100vw"
+                key={index.file_path}
+                style={{
+                  width: "300px",
+                  height: "150px",
+                  objectFit: "cover",
+                }} // optional
+                alt="movie poster"
+                className="rounded-md"
+              ></Image>
+            ))}
         </div>
       </div>
       <div className="hidden md:flex text-4xl absolute inset-y-2/4 w-full justify-between">

@@ -221,26 +221,10 @@ const ViewPage = ({ media }) => {
           <div className="mt-10 flex gap-10">
             <h1 className="text-4xl font-bold">Images</h1>
           </div>
-          <div className="grid md:grid-cols-4 gap-5 mt-5">
-            {media.images &&
-              media.images.backdrops.slice(0, 10).map((image) => {
-                return (
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    key={image.file_path}
-                    style={{
-                      width: "300px",
-                      height: "150px",
-                      objectFit: "cover",
-                    }} // optional
-                    alt="movie poster"
-                    className="rounded-md"
-                  ></Image>
-                );
-              })}
+          <div className="">
+            {media.images && (
+              <Carousel data={media.images.backdrops} type="media_images" />
+            )}
           </div>
         </div>
       </div>
