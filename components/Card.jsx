@@ -17,13 +17,19 @@ function MovieCard({ movie, type }) {
   return (
     <div className=" text-white rounded-md w-fit hover:cursor-pointer">
       <motion.div onClick={() => handleOnClick()} whileHover={{ scale: 1.05 }}>
+        {/* check if movie.poster.path is not empty, if its empty use default image */}
         <Image
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+              : "/assets/not_found.jpg"
+          }
           width={300}
           height={300}
+          sizes="100vw"
           alt="movie poster"
           className="rounded-md"
-        ></Image>
+        />
 
         <div className="mt-5">
           <div className="flex items-center justify-between">
