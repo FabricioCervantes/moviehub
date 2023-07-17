@@ -12,6 +12,8 @@ export const GET = async (request, { params }) => {
       `https://api.themoviedb.org/3/person/${params.id}/movie_credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     ).then((res) => res.json());
 
+    movies.cast.sort((a, b) => b.popularity - a.popularity);
+
     person.images = images;
     person.movies = movies;
 
