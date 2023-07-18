@@ -51,8 +51,6 @@ const SeasonView = ({ season }) => {
       <h1 className="text-white text-4xl font-bold text-center">Episodes</h1>
       <div className="flex justify-center">
         <div className="grid md:grid-cols-2 gap-5 p-2 max-w-5xl w-full">
-          {/* {season.episodes && <Carousel data={media.credits.cast}  />} */}
-          {/* get episodes with name, image, overview, air date, and episode number */}
           {season.episodes &&
             season.episodes.map((episode) => {
               return (

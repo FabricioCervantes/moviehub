@@ -3,11 +3,8 @@
 import { useEffect, useState, useCallback } from "react";
 
 import useEmblaCarousel from "embla-carousel-react";
-import {
-  BsFillArrowLeftCircleFill,
-  BsFillArrowRightCircleFill,
-  BsFillStarFill,
-} from "react-icons/bs";
+import { BsFillStarFill } from "react-icons/bs";
+import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
 import MovieCard from "@components/Card";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -104,7 +101,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
           {type === "tv_seasons" &&
             data.map((index) => (
               <div
-                className=" text-white flex flex-col items-center"
+                className=" text-white flex flex-col items-center hover:cursor-pointer"
                 onClick={() => handleSeasonClick(index.season_number)}
               >
                 <Image
@@ -118,7 +115,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
                     objectFit: "cover",
                   }} // optional
                   alt="movie poster"
-                  className="rounded-m"
+                  className="rounded-md"
                 ></Image>
                 <div className="flex flex-col items-center p-2 gap-2">
                   <h1 className="text-2xl text-center md:text-start font-bold">
@@ -145,7 +142,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
               className="transform -translate-y-1/2  -translate-x-3/4"
               onClick={scrollPrev}
             >
-              <BsFillArrowLeftCircleFill />
+              <BiSolidLeftArrow />
             </button>
           </div>
           <div className="flex">
@@ -153,7 +150,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
               className="transform -translate-y-1/2 -translate-x-3/4"
               onClick={scrollNext}
             >
-              <BsFillArrowRightCircleFill />
+              <BiSolidRightArrow />
             </button>
           </div>
         </div>

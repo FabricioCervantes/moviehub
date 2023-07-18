@@ -127,3 +127,11 @@
 .embla__slide h1 {
   display: block;
 }
+
+.bg_page {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    var(--image-url);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

@@ -84,11 +84,15 @@ const ViewPage = ({ media }) => {
     router.push(`/tv/${media.id}/season/${season}`);
   };
 
-  console.log(media.seasons);
+  console.log(media);
+  const bgPhoto = `https://image.tmdb.org/t/p/original${media.backdrop_path}`;
 
   return (
-    <>
-      <div className="flex justify-center">
+    <div
+      className="bg-[image:var(--image-url)] bg-no-repeat bg-cover bg-center bg-fixed bg_page"
+      style={{ "--image-url": `url(${bgPhoto})` }}
+    >
+      <div className={`flex justify-center pb-5`}>
         <div className="text-white max-w-5xl w-full">
           <div className="mt-10 flex p-2 md:p-0 flex-col md:flex-row gap-10">
             <Image
@@ -152,27 +156,31 @@ const ViewPage = ({ media }) => {
           </div>
         </div>
       </div>
-      {/* <p className="text-4xl text-white px-5">Cast</p> */}
       <div className="p-5">
+        <p className="text-4xl font-bold text-center text-white px-5">Cast</p>
         {media.credits && media.credits.cast.length > 0 && (
           <EmblaCarousel actors={media.credits.cast} />
         )}
       </div>
       <div className="p-5">
         {media.seasons && (
-          <Carousel
-            data={media.seasons}
-            type="tv_seasons"
-            handleSeasonClick={handleSeasonClick}
-          />
+          <>
+            <h1 className="text-4xl font-bold text-center text-white px-5">
+              Seasons
+            </h1>
+            <Carousel
+              data={media.seasons}
+              type="tv_seasons"
+              handleSeasonClick={handleSeasonClick}
+            />
+          </>
         )}
       </div>
       {/* Get images of movie */}
-      <div className="p-5 flex justify-center">
+      <h1 className="text-4xl font-bold text-center text-white">Images</h1>
+      <div className="px-5 flex justify-center">
         <div className="text-white w-full">
-          <div className="mt-10 flex gap-10">
-            <h1 className="text-4xl font-bold">Images</h1>
-          </div>
+          <div className="flex gap-10"></div>
           <div className="">
             {media.images && (
               <Carousel data={media.images.backdrops} type="media_images" />
@@ -181,11 +189,10 @@ const ViewPage = ({ media }) => {
         </div>
       </div>
       {/* get videos using video variables */}
-      <div className="p-5 flex justify-center">
+      <h1 className="text-4xl font-bold text-center text-white">Videos</h1>
+      <div className="px-5 flex justify-center">
         <div className="text-white w-full">
-          <div className="mt-10 flex gap-10">
-            <h1 className="text-4xl font-bold">Videos</h1>
-          </div>
+          <div className="flex gap-10"></div>
           <div className="">
             {media.videos && (
               <Carousel data={media.videos.results} type="media_videos" />
@@ -193,7 +200,7 @@ const ViewPage = ({ media }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
