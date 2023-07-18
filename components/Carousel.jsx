@@ -6,6 +6,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
+  BsFillStarFill,
 } from "react-icons/bs";
 import MovieCard from "@components/Card";
 import Image from "next/image";
@@ -74,26 +75,60 @@ const Carousel = ({ data, type }) => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               ></iframe>
             ))}
+          {type === "tv_seasons" &&
+            data.map((index) => (
+              <div className=" text-white flex flex-col items-center">
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${index.poster_path}`}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{
+                    width: "auto",
+                    height: "400px",
+                    objectFit: "cover",
+                  }} // optional
+                  alt="movie poster"
+                  className="rounded-m"
+                ></Image>
+                <div className="flex flex-col items-center p-2 gap-2">
+                  <h1 className="text-2xl text-center md:text-start font-bold">
+                    {index.name}
+                  </h1>
+                  <div className="flex gap-5">
+                    <p>{index.air_date.slice(0, 4)}</p>
+                    <p>{index.episode_count} episodes</p>
+                    <p className="flex items-center gap-2">
+                      <BsFillStarFill className="text-yellow-500" />
+                      {Math.round(index.vote_average * 10) / 10} / 10
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
-      <div className="hidden md:flex text-4xl absolute inset-y-2/4 w-full justify-between">
-        <div className="flex">
-          <button
-            className="transform -translate-y-1/2  -translate-x-3/4"
-            onClick={scrollPrev}
-          >
-            <BsFillArrowLeftCircleFill />
-          </button>
+      {/* check if data length is above 4 */}
+      {data.length > 4 && (
+        <div className="hidden md:flex text-4xl absolute inset-y-2/4 w-full justify-between">
+          <div className="flex">
+            <button
+              className="transform -translate-y-1/2  -translate-x-3/4"
+              onClick={scrollPrev}
+            >
+              <BsFillArrowLeftCircleFill />
+            </button>
+          </div>
+          <div className="flex">
+            <button
+              className="transform -translate-y-1/2 -translate-x-3/4"
+              onClick={scrollNext}
+            >
+              <BsFillArrowRightCircleFill />
+            </button>
+          </div>
         </div>
-        <div className="flex">
-          <button
-            className="transform -translate-y-1/2 -translate-x-3/4"
-            onClick={scrollNext}
-          >
-            <BsFillArrowRightCircleFill />
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -151,69 +151,8 @@ const ViewPage = ({ media }) => {
           <EmblaCarousel actors={media.credits.cast} />
         )}
       </div>
-      <div className="">
-        {media.seasonsInfo &&
-          media.seasonsInfo.map((season) => {
-            return (
-              <div className="flex justify-center">
-                <div className="text-white w-full">
-                  <div className="mt-10 flex p-2 md:p-0 flex-col md:flex-row gap-10">
-                    <Image
-                      src={`https://image.tmdb.org/t/p/w500${season.poster_path}`}
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                      style={{
-                        width: "auto",
-                        height: "500px",
-                        objectFit: "cover",
-                      }} // optional
-                      alt="movie poster"
-                      className="rounded-m"
-                    ></Image>
-                    <div className="flex flex-col p-2 gap-2">
-                      <h1 className="text-4xl text-center md:text-start font-bold">
-                        {season.name}
-                      </h1>
-                      <div className="flex gap-5">
-                        <p>{season.air_date.slice(0, 4)}</p>
-                        <p>{season.episode_count} episodes</p>
-                        <p className="flex items-center gap-2">
-                          <BsFillStarFill className="text-yellow-500" />
-                          {Math.round(season.vote_average * 10) / 10} / 10
-                        </p>
-                      </div>
-                      <p className="text-lg">{season.overview}</p>
-                      <div className="grid grid-cols-4 pt-5">
-                        {season.episodes.map((episode) => {
-                          return (
-                            <>
-                              <div>
-                                <Image
-                                  src={`https://image.tmdb.org/t/p/w500${episode.still_path}`}
-                                  width={0}
-                                  height={0}
-                                  sizes="100vw"
-                                  style={{
-                                    width: "100px",
-                                    height: "100px",
-                                    objectFit: "cover",
-                                  }} // optional
-                                  alt="movie poster"
-                                  className="rounded-m"
-                                ></Image>
-                                <div>{episode.name}</div>
-                              </div>
-                            </>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+      <div className="p-5">
+        {media.seasons && <Carousel data={media.seasons} type="tv_seasons" />}
       </div>
       {/* Get images of movie */}
       <div className="p-5 flex justify-center">
