@@ -10,8 +10,12 @@ import {
 } from "react-icons/bs";
 import MovieCard from "@components/Card";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const Carousel = ({ data, type }) => {
+const Carousel = ({ data, type, handleSeasonClick }) => {
+  const router = useRouter();
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ slidesToScroll: "auto" });
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -28,6 +32,28 @@ const Carousel = ({ data, type }) => {
             data.map((index) => (
               <div className="embla__slide" key={index.id}>
                 <MovieCard movie={index} type="movie" />
+              </div>
+            ))}
+          {type === "actors" &&
+            data.map((index) => (
+              <div
+                className="embla__slide hover:cursor-pointer"
+                key={index.id}
+                // onClick={() => handleActor(index.id)}
+              >
+                <div className="flex flex-col items-center">
+                  <Avatar className="h-32 w-32">
+                    <AvatarImage
+                      className="object-cover"
+                      src={`https://image.tmdb.org/t/p/w500${index.profile_path}`}
+                    />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-bold text-center">{index.name}</p>
+                    <p className="w-40 text-center">{index.character}</p>
+                  </div>
+                </div>
               </div>
             ))}
           {type === "person_images" &&
@@ -77,7 +103,10 @@ const Carousel = ({ data, type }) => {
             ))}
           {type === "tv_seasons" &&
             data.map((index) => (
-              <div className=" text-white flex flex-col items-center">
+              <div
+                className=" text-white flex flex-col items-center"
+                onClick={() => handleSeasonClick(index.season_number)}
+              >
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${index.poster_path}`}
                   width={0}

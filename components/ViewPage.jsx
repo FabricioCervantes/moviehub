@@ -78,7 +78,14 @@ const EmblaCarousel = ({ actors }) => {
 };
 
 const ViewPage = ({ media }) => {
-  console.log(media);
+  const router = useRouter();
+
+  const handleSeasonClick = (season) => {
+    router.push(`/tv/${media.id}/season/${season}`);
+  };
+
+  console.log(media.seasons);
+
   return (
     <>
       <div className="flex justify-center">
@@ -152,7 +159,13 @@ const ViewPage = ({ media }) => {
         )}
       </div>
       <div className="p-5">
-        {media.seasons && <Carousel data={media.seasons} type="tv_seasons" />}
+        {media.seasons && (
+          <Carousel
+            data={media.seasons}
+            type="tv_seasons"
+            handleSeasonClick={handleSeasonClick}
+          />
+        )}
       </div>
       {/* Get images of movie */}
       <div className="p-5 flex justify-center">
