@@ -27,7 +27,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
         <div className="embla__container auto-cols-[100%] md:auto-cols-[25%]">
           {type === "movie_poster" &&
             data.map((index) => (
-              <div className="embla__slide" key={index.id}>
+              <div className="embla__slide p-1" key={index.id}>
                 <MovieCard movie={index} type="movie" />
               </div>
             ))}
@@ -139,7 +139,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
         <div className="hidden md:flex text-4xl absolute inset-y-2/4 w-full justify-between">
           <div className="flex">
             <button
-              className="transform -translate-y-1/2  -translate-x-3/4"
+              className="transform -translate-y-1/2  -translate-x-5"
               onClick={scrollPrev}
             >
               <BiSolidLeftArrow />
@@ -147,7 +147,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
           </div>
           <div className="flex">
             <button
-              className="transform -translate-y-1/2 -translate-x-3/4"
+              className="transform -translate-y-1/2 -translate-x-5"
               onClick={scrollNext}
             >
               <BiSolidRightArrow />

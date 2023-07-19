@@ -57,31 +57,17 @@ const PersonProfile = ({ person }) => {
           </div>
         </div>
       </div>
-      {/* get person images */}
-      <div className="flex flex-col md:flex-row gap-10 mt-5 p-5">
-        <div className="w-full flex flex-col gap-5">
-          <h1 className="text-4xl font-bold text-center text-white md:text-left">
-            Images
-          </h1>
-          <div className="">
-            {person.images && (
-              <Carousel data={person.images.profiles} type="person_images" />
-            )}
-          </div>
-        </div>
+      <h1 className="text-4xl font-bold text-center text-white">Images</h1>
+      <div className="p-5">
+        {person.images && (
+          <Carousel data={person.images.profiles} type="person_images" />
+        )}
       </div>
-      {/* get person movies */}
-      <div className="flex flex-col md:flex-row gap-10 p-5">
-        <div className="w-full flex flex-col gap-5">
-          <h1 className="text-4xl font-bold text-center text-white md:text-left">
-            Movies
-          </h1>
-          <div className="">
-            {person.movies && (
-              <Carousel data={person.movies.cast} type="movie_poster" />
-            )}
-          </div>
-        </div>
+      <h1 className="text-4xl font-bold text-center text-white">Movies</h1>
+      <div className="p-5">
+        {person.movies && (
+          <Carousel data={person.movies.cast} type="movie_poster" />
+        )}
       </div>
     </>
   );
