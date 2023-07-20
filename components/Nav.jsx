@@ -8,6 +8,7 @@ import Image from "next/image";
 import MainBtn from "./ui/MainBtn";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import SearchBar from "./SearchBar";
 
 import {
   DropdownMenu,
@@ -41,6 +42,7 @@ const Nav = () => {
           width={150}
         ></Image>
       </Link>
+      <SearchBar />
       <ul className="hidden md:flex gap-20">
         <Link href="/movies">
           <div className="text-2xl font-bold">MOVIES</div>
@@ -48,12 +50,12 @@ const Nav = () => {
         <Link href="/tv">
           <div className="text-2xl font-bold">TV SHOWS</div>
         </Link>
-        <Link href="/">
+        {/* <Link href="/">
           <div className="text-2xl font-bold">PRICING</div>
         </Link>
         <Link href="/">
           <div className="text-2xl font-bold">ABOUT</div>
-        </Link>
+        </Link> */}
       </ul>
       {session?.user ? (
         <div className="flex gap-5 items-center">
