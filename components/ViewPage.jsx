@@ -194,11 +194,11 @@ const ViewPage = ({ media }) => {
       <div className="px-5 flex justify-center">
         <div className="text-white w-full">
           <div className="flex gap-10"></div>
-          <div className="">
+          {/* <div className="">
             {media.videos && (
               <Carousel data={media.videos.results} type="media_videos" />
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
