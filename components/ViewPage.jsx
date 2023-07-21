@@ -89,7 +89,7 @@ const ViewPage = ({ media }) => {
 
   return (
     <div
-      className="bg-[image:var(--image-url)] bg_page w-full min-h-screen bg-cover bg-center z-[-1] left-0 top-0"
+      className="bg-[image:var(--image-url)] bg_page"
       style={{ "--image-url": `url(${bgPhoto})` }}
     >
       <div className={`flex justify-center pb-5`}>
