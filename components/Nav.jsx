@@ -51,7 +51,9 @@ const Nav = () => {
           ></Image>
         </Link>
       )}
-      <div className="hidden lg:block">{/* <DynamicSearchBar /> */}</div>
+      <div className="hidden lg:block">
+        <DynamicSearchBar />
+      </div>
       <ul className="hidden lg:flex gap-5">
         <Link href="/movies">
           <div className="text-2xl font-bold">MOVIES</div>
@@ -108,7 +110,7 @@ const Nav = () => {
               }}
               className="text-2xl"
             />
-            {/* <DynamicSearchBar /> */}
+            <DynamicSearchBar />
           </div>
         )}
       </div>

@@ -25,10 +25,6 @@ const SearchBar = () => {
     setData(searchedMovies.results);
   }
 
-  useEffect(() => {
-    Home();
-  }, [data]);
-
   const handleClick = (value) => {
     if (value.title) {
       setShowResults(false);
@@ -68,6 +64,7 @@ const SearchBar = () => {
     setWordEntered("");
     setShowResults(false);
   };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
