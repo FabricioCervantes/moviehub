@@ -86,7 +86,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-[300px] md:w-[600px]" ref={searchContainerRef}>
+    <div className="w-[300px] lg:w-[600px]" ref={searchContainerRef}>
       <div className="flex text-white nav-bg p-2 rounded-md">
         <input
           type="text"
@@ -123,7 +123,7 @@ const SearchBar = () => {
               >
                 {/* get image, title */}
                 <div className="flex gap-2 items-center">
-                  <Avatar className="h-16 w-fit">
+                  <Avatar className="h-16 lg:w-fit">
                     {value.poster_path && (
                       <AvatarImage
                         src={`https://image.tmdb.org/t/p/w500${value.poster_path} `}
