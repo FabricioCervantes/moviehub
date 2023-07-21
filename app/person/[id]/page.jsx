@@ -1,20 +1,15 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PersonProfile from "@components/PersonProfile";
+import { headers } from "next/headers";
 
-const page = ({ params }) => {
-  const [profile, setProfile] = useState(0);
-  const getData = async () => {
-    const res = await fetch(`/api/person/${params.id}/`);
-    const data = await res.json();
-    setProfile(data);
-  };
-  getData();
+const page = async ({ params }) => {
+  const host = headers().get("host");
+  const res = await fetch(`http://${host}/api/person/${params.id}/`);
+  const data = await res.json();
 
   return (
     <div>
-      <PersonProfile person={profile} />
+      <PersonProfile person={data} />
     </div>
   );
 };
