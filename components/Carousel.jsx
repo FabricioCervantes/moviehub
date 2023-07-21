@@ -90,7 +90,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
                           sizes="100vw"
                           style={{
                             width: "550px",
-                            height: "700px",
+                            // height: "700px",
                             objectFit: "cover",
                           }} // optional
                           alt="person image"
@@ -104,20 +104,43 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
             ))}
           {type === "media_images" &&
             data.map((index) => (
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${index.file_path}`}
-                width={0}
-                height={0}
-                sizes="100vw"
-                key={index.file_path}
-                style={{
-                  width: "300px",
-                  height: "150px",
-                  objectFit: "cover",
-                }} // optional
-                alt="movie poster"
-                className="rounded-md"
-              ></Image>
+              <Dialog>
+                <DialogTrigger className="ml-9">
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${index.file_path}`}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    key={index.file_path}
+                    style={{
+                      width: "300px",
+                      height: "150px",
+                      objectFit: "cover",
+                    }} // optional
+                    alt="movie poster"
+                    className="rounded-md"
+                  ></Image>
+                </DialogTrigger>
+                <DialogContent className="p-0 max-w-6xl">
+                  <DialogHeader className="p-0">
+                    <DialogDescription>
+                      <Image
+                        src={`https://image.tmdb.org/t/p/original/${index.file_path}`}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
+                        key={index.file_path}
+                        style={{
+                          width: "1200px",
+                          objectFit: "cover",
+                        }} // optional
+                        alt="movie poster"
+                        className="rounded-md"
+                      />
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
             ))}
           {type === "media_videos" &&
             data.map((index) => (
