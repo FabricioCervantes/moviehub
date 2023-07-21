@@ -1,15 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
 import MovieCard from "@components/Card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 const DisplayMedia = ({ media, type }) => {
   return (
