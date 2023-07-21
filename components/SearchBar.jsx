@@ -86,8 +86,8 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-[600px]" ref={searchContainerRef}>
-      <div className="flex text-black bg-white p-2 rounded-md">
+    <div className="w-[300px] md:w-[600px]" ref={searchContainerRef}>
+      <div className="flex text-white nav-bg p-2 rounded-md w-full ">
         <input
           type="text"
           placeholder="Search movie..."
@@ -101,16 +101,9 @@ const SearchBar = () => {
               clearInput();
             }
           }}
-          clear
-          search
-          bar
-          when
-          user
-          press
-          esc
-          className="focus:outline-none w-full"
+          className="focus:outline-none md:w-full bg-transparent text-sm md:text-xl"
         />
-        <div className="text-black text-2xl">
+        <div className="text-white text-2xl hidden md:block">
           {filteredData.length === 0 ? (
             <BiSearch />
           ) : (
@@ -119,7 +112,7 @@ const SearchBar = () => {
         </div>
       </div>
       {showResults && filteredData.length !== 0 && (
-        <div className="bg-white text-black rounded-md mt-2 absolute w-[600px] p-2">
+        <div className="text-white rounded-md mt-2 nav-bg absolute w-[300px] p-2">
           {filteredData.slice(0, 4).map((value, key) => {
             return (
               <div
