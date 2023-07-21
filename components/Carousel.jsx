@@ -144,15 +144,16 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
             ))}
           {type === "media_videos" &&
             data.map((index) => (
-              <iframe
-                key={index.id}
-                width="350"
-                height="200"
-                src={`https://www.youtube.com/embed/${index.key}`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              ></iframe>
+              <></>
+              // <iframe
+              //   key={index.id}
+              //   width="350"
+              //   height="200"
+              //   src={`https://www.youtube.com/embed/${index.key}`}
+              //   title="YouTube video player"
+              //   frameBorder="0"
+              //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              // ></iframe>
             ))}
           {type === "tv_seasons" &&
             data.map((index) => (
