@@ -1,4 +1,5 @@
 "use client";
+
 import DisplayMedia from "@components/DisplayMedia";
 import { useEffect, useState } from "react";
 import {
@@ -59,7 +60,7 @@ const Movies = () => {
 
   return (
     <>
-      <div className="flex text-white px-5 justify-end gap-5">
+      {/* <div className="flex text-white px-5 justify-end gap-5">
         <Select onValueChange={(e) => handleGenre(e)}>
           <SelectTrigger className="w-[180px] border-2">
             <SelectValue placeholder="Genre" />
@@ -103,7 +104,7 @@ const Movies = () => {
             {item}
           </p>
         ))}
-      </div>
+      </div> */}
     </>
   );
 };
