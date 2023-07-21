@@ -10,7 +10,7 @@ const PersonProfile = ({ person }) => {
     <>
       <div className="flex justify-center">
         <div className="text-white max-w-5xl w-full">
-          <div className="flex flex-col md:flex-row p-3 md:p-10 lg:p-0 gap-10">
+          <div className="flex flex-col md:flex-row p-3 md:p-10 gap-10">
             <div className="min-w-fit flex flex-col items-center">
               <Image
                 src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
