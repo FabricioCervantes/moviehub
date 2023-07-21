@@ -123,7 +123,7 @@ const SearchBar = () => {
               >
                 {/* get image, title */}
                 <div className="flex gap-2 items-center">
-                  <Avatar className="h-16 lg:w-fit">
+                  <Avatar className="h-16 w-16">
                     {value.poster_path && (
                       <AvatarImage
                         src={`https://image.tmdb.org/t/p/w500${value.poster_path} `}
