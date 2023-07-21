@@ -17,7 +17,6 @@ function MovieCard({ movie, type }) {
   return (
     <div className=" text-white rounded-md w-fit hover:cursor-pointer">
       <motion.div onClick={() => handleOnClick()} whileHover={{ scale: 1.05 }}>
-        {/* check if movie.poster.path is not empty, if its empty use default image */}
         <Image
           src={
             movie.poster_path
@@ -33,7 +32,7 @@ function MovieCard({ movie, type }) {
 
         <div className="mt-5">
           <div className="flex items-center justify-between">
-            <h1 className="text-lg truncate w-60 font-bold">{movie.title}</h1>
+            <h1 className="text-lg truncate w-48 font-bold">{movie.title}</h1>
             {movie.release_date && <p>{movie.release_date.split("-")[0]}</p>}
           </div>
           <div className="flex mt-5 justify-between">
