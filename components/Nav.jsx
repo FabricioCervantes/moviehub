@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import dynamic from "next/dynamic";
 
 import Image from "next/image";
 import MainBtn from "./ui/MainBtn";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import SearchBar from "./SearchBar";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -20,6 +20,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+const DynamicSearchBar = dynamic(() => import("./SearchBar"), {
+  ssr: false,
+});
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -47,7 +51,9 @@ const Nav = () => {
           ></Image>
         </Link>
       )}
-      <div className="hidden lg:block">{/* <SearchBar /> */}</div>
+      <div className="hidden lg:block">
+        <DynamicSearchBar />
+      </div>
       <ul className="hidden lg:flex gap-5">
         <Link href="/movies">
           <div className="text-2xl font-bold">MOVIES</div>
@@ -87,7 +93,7 @@ const Nav = () => {
             ))}
         </ul>
       )}
-      {/* <div className="lg:hidden text-4xl">
+      <div className="lg:hidden text-4xl">
         {!toggleSearch && (
           <BiSearch
             onClick={() => {
@@ -104,10 +110,10 @@ const Nav = () => {
               }}
               className="text-2xl"
             />
-            <SearchBar />
+            <DynamicSearchBar />
           </div>
         )}
-      </div> */}
+      </div>
       <ul className="lg:hidden">
         {!toggleSearch && (
           <DropdownMenu>
