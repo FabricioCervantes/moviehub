@@ -47,9 +47,7 @@ const Nav = () => {
           ></Image>
         </Link>
       )}
-      <div className="hidden lg:block">
-        <SearchBar />
-      </div>
+      <div className="hidden lg:block">{/* <SearchBar /> */}</div>
       <ul className="hidden lg:flex gap-5">
         <Link href="/movies">
           <div className="text-2xl font-bold">MOVIES</div>
@@ -89,7 +87,7 @@ const Nav = () => {
             ))}
         </ul>
       )}
-      <div className="lg:hidden text-4xl">
+      {/* <div className="lg:hidden text-4xl">
         {!toggleSearch && (
           <BiSearch
             onClick={() => {
@@ -109,7 +107,7 @@ const Nav = () => {
             <SearchBar />
           </div>
         )}
-      </div>
+      </div> */}
       <ul className="lg:hidden">
         {!toggleSearch && (
           <DropdownMenu>
