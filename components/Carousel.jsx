@@ -9,6 +9,14 @@ import MovieCard from "@components/Card";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Carousel = ({ data, type, handleSeasonClick }) => {
   const router = useRouter();
@@ -55,19 +63,44 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
             ))}
           {type === "person_images" &&
             data.map((index) => (
-              <Image
-                src={`https://image.tmdb.org/t/p/original/${index.file_path}`}
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{
-                  width: "auto",
-                  height: "450px",
-                  objectFit: "cover",
-                }} // optional
-                alt="person image"
-                className="rounded-lg"
-              />
+              <>
+                <Dialog>
+                  <DialogTrigger className="ml-9">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/original/${index.file_path}`}
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      style={{
+                        width: "auto",
+                        height: "450px",
+                        objectFit: "cover",
+                      }} // optional
+                      alt="person image"
+                      className="rounded-lg"
+                    />
+                  </DialogTrigger>
+                  <DialogContent className="p-0">
+                    <DialogHeader className="p-0">
+                      <DialogDescription>
+                        <Image
+                          src={`https://image.tmdb.org/t/p/original/${index.file_path}`}
+                          width={0}
+                          height={0}
+                          sizes="100vw"
+                          style={{
+                            width: "550px",
+                            height: "700px",
+                            objectFit: "cover",
+                          }} // optional
+                          alt="person image"
+                          className="rounded-lg"
+                        />
+                      </DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+              </>
             ))}
           {type === "media_images" &&
             data.map((index) => (
