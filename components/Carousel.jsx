@@ -32,7 +32,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
   return (
     <div className="embla text-white relative">
       <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container auto-cols-[100%] md:auto-cols-[25%]">
+        <div className="embla__container auto-cols-[100%] md:auto-cols-[50%] lg:auto-cols-[25%]">
           {type === "movie_poster" &&
             data.map((index) => (
               <div className="embla__slide p-1" key={index.id}>
@@ -193,7 +193,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
       </div>
       {/* check if data length is above 4 */}
       {data.length > 4 && (
-        <div className="hidden md:flex text-4xl absolute inset-y-2/4 w-full justify-between">
+        <div className="hidden lg:flex text-4xl absolute inset-y-2/4 w-full justify-between">
           <div className="flex">
             <button
               className="transform -translate-y-1/2  -translate-x-5"
@@ -204,7 +204,7 @@ const Carousel = ({ data, type, handleSeasonClick }) => {
           </div>
           <div className="flex">
             <button
-              className="transform -translate-y-1/2 -translate-x-5"
+              className="transform -translate-y-1/2  lg:-translate-x-3"
               onClick={scrollNext}
             >
               <BiSolidRightArrow />

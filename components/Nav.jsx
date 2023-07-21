@@ -47,10 +47,10 @@ const Nav = () => {
           ></Image>
         </Link>
       )}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <SearchBar />
       </div>
-      <ul className="hidden md:flex gap-20">
+      <ul className="hidden lg:flex gap-20">
         <Link href="/movies">
           <div className="text-2xl font-bold">MOVIES</div>
         </Link>
@@ -66,16 +66,16 @@ const Nav = () => {
       </ul>
       {session?.user ? (
         <div className="flex gap-5 items-center">
-          <ul className="hidden md:block">
+          <ul className="hidden lg:block">
             <MainBtn action={signOut} text="Sign Out" />
           </ul>
-          <Avatar className="hidden md:block">
+          <Avatar className="hidden lg:block">
             <AvatarImage src={session?.user.image} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </div>
       ) : (
-        <ul className="hidden md:block">
+        <ul className="hidden lg:block">
           {providers &&
             Object.values(providers).map((provider) => (
               <MainBtn
@@ -89,7 +89,7 @@ const Nav = () => {
             ))}
         </ul>
       )}
-      <div className="md:hidden text-4xl">
+      <div className="lg:hidden text-4xl">
         {!toggleSearch && (
           <BiSearch
             onClick={() => {
@@ -110,7 +110,7 @@ const Nav = () => {
           </div>
         )}
       </div>
-      <ul className="md:hidden">
+      <ul className="lg:hidden">
         {!toggleSearch && (
           <DropdownMenu>
             <DropdownMenuTrigger>

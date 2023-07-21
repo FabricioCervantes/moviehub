@@ -86,7 +86,10 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-[300px] lg:w-[600px]" ref={searchContainerRef}>
+    <div
+      className="w-[300px] md:w-[700px] lg:w-[450px]"
+      ref={searchContainerRef}
+    >
       <div className="flex text-white nav-bg p-2 rounded-md">
         <input
           type="text"
@@ -112,7 +115,7 @@ const SearchBar = () => {
         </div>
       </div>
       {showResults && filteredData.length !== 0 && (
-        <div className="text-white rounded-md mt-2 nav-bg absolute w-[300px] md:w-[600px] p-2">
+        <div className="text-white rounded-md mt-2 nav-bg absolute w-[300px] md:w-[700px] lg:w-[600px] p-2">
           {filteredData.slice(0, 4).map((value, key) => {
             return (
               <div
