@@ -31,12 +31,12 @@ const Movies = () => {
     ).then((res) => res.json());
   };
 
-  const fetchMovies = async () => {
-    const test = await fetchGenre();
-    const upcomingMovies = await fetchUpcomingMovies();
-    setMovies(upcomingMovies.results);
-    setGenre(test.genres);
-  };
+  // const fetchMovies = async () => {
+  //   const test = await fetchGenre();
+  //   const upcomingMovies = await fetchUpcomingMovies();
+  //   setMovies(upcomingMovies.results);
+  //   setGenre(test.genres);
+  // };
 
   const handlePage = (item) => {
     setPage(item);
@@ -54,9 +54,9 @@ const Movies = () => {
     fetchMovies();
   };
 
-  useEffect(() => {
-    fetchMovies();
-  }, [sort, page, selectedGenre]);
+  // useEffect(() => {
+  //   fetchMovies();
+  // }, [sort, page, selectedGenre]);
 
   return (
     <>
