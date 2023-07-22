@@ -1,5 +1,4 @@
 "use client";
-
 import DisplayMedia from "@components/DisplayMedia";
 import { useEffect, useState } from "react";
 import {
@@ -31,12 +30,12 @@ const Movies = () => {
     ).then((res) => res.json());
   };
 
-  // const fetchMovies = async () => {
-  //   const test = await fetchGenre();
-  //   const upcomingMovies = await fetchUpcomingMovies();
-  //   setMovies(upcomingMovies.results);
-  //   setGenre(test.genres);
-  // };
+  const fetchMovies = async () => {
+    const test = await fetchGenre();
+    const upcomingMovies = await fetchUpcomingMovies();
+    setMovies(upcomingMovies.results);
+    setGenre(test.genres);
+  };
 
   const handlePage = (item) => {
     setPage(item);
@@ -54,13 +53,13 @@ const Movies = () => {
     fetchMovies();
   };
 
-  // useEffect(() => {
-  //   fetchMovies();
-  // }, [sort, page, selectedGenre]);
+  useEffect(() => {
+    fetchMovies();
+  }, [sort, page, selectedGenre]);
 
   return (
     <>
-      {/* <div className="flex text-white px-5 justify-end gap-5">
+      <div className="flex text-white px-5 justify-end gap-5">
         <Select onValueChange={(e) => handleGenre(e)}>
           <SelectTrigger className="w-[180px] border-2">
             <SelectValue placeholder="Genre" />
@@ -104,7 +103,7 @@ const Movies = () => {
             {item}
           </p>
         ))}
-      </div> */}
+      </div>
     </>
   );
 };
