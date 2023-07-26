@@ -1,22 +1,17 @@
-"use client";
 import React from "react";
-import { useState, useEffect } from "react";
 import SeasonView from "@components/SeasonView";
-const page = ({ params }) => {
+import { headers } from "next/headers";
+
+const page = async ({ params }) => {
   const seasonId = params.seasonId;
 
-  const [season, setSeason] = useState([]);
+  const host = headers().get("host");
+  const res = await fetch(
+    `http://${host}/api/tv/${params.id}/season/${seasonId}`
+  );
+  const data = await res.json();
 
-  useEffect(() => {
-    const getData = async () => {
-      const res = await fetch(`/api/tv/${params.id}/season/${seasonId}`);
-      const data = await res.json();
-      setSeason(data);
-    };
-    getData();
-  }, [season]);
-
-  return <SeasonView season={season} />;
+  return <SeasonView season={data} />;
 };
 
 export default page;
