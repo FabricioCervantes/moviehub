@@ -47,7 +47,7 @@ const DisplayMedia = ({ media, type, fetchTest, genreTest }) => {
   useEffect(() => {
     fetchMovies();
     // fetchGenres();
-  }, [movies, genre]);
+  }, []);
 
   return (
     <>
