@@ -1,8 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
-// import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import dynamic from "next/dynamic";
 
 import Image from "next/image";
@@ -30,7 +26,7 @@ const Nav = () => {
 
   // const [providers, setProviders] = useState(null);
   // const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [toggleSearch, setToggleSearch] = useState(false);
+  // const [toggleSearch, setToggleSearch] = useState(false);
 
   // useEffect(() => {
   //   (async () => {
@@ -41,19 +37,17 @@ const Nav = () => {
 
   return (
     <nav className="flex bg-transparent justify-between text-white p-5 items-center">
-      {!toggleSearch && (
-        <Link href="/">
-          <Image
-            src="/assets/logo.png"
-            alt="logo"
-            height={150}
-            width={150}
-          ></Image>
-        </Link>
-      )}
-      <div className="hidden lg:block">
+      <Link href="/">
+        <Image
+          src="/assets/logo.png"
+          alt="logo"
+          height={150}
+          width={150}
+        ></Image>
+      </Link>
+      {/* <div className="hidden lg:block">
         <DynamicSearchBar />
-      </div>
+      </div> */}
       <ul className="hidden lg:flex gap-5">
         <Link href="/movies">
           <div className="text-2xl font-bold">MOVIES</div>
@@ -93,7 +87,7 @@ const Nav = () => {
             ))}
         </ul>
       )} */}
-      <div className="lg:hidden text-4xl">
+      {/* <div className="lg:hidden text-4xl">
         {!toggleSearch && (
           <BiSearch
             onClick={() => {
@@ -113,7 +107,7 @@ const Nav = () => {
             <DynamicSearchBar />
           </div>
         )}
-      </div>
+      </div> */}
       {/* <ul className="lg:hidden">
         {!toggleSearch && (
           <DropdownMenu>
