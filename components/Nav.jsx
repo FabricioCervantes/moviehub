@@ -11,6 +11,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -27,6 +28,7 @@ const DynamicSearchBar = dynamic(() => import("./SearchBar"), {
 
 const Nav = () => {
   const { data: session } = useSession();
+  const Router = useRouter();
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -38,6 +40,14 @@ const Nav = () => {
       setProviders(res);
     })();
   }, []);
+
+  const handleMovieClick = () => {
+    Router.push("/movies");
+  };
+
+  const handleTvClick = () => {
+    Router.push("/tv");
+  };
 
   return (
     <nav className="flex bg-transparent justify-between text-white p-5 items-center">
@@ -55,12 +65,12 @@ const Nav = () => {
         <DynamicSearchBar />
       </div>
       <ul className="hidden lg:flex gap-5">
-        <Link href="movies">
+        <li onClick={() => handleMovieClick()} className="hover:cursor-pointer">
           <div className="text-2xl font-bold">MOVIES</div>
-        </Link>
-        <Link href="tv">
+        </li>
+        <li onClick={() => handleTvClick()} className="hover:cursor-pointer">
           <div className="text-2xl font-bold">TV SHOWS</div>
-        </Link>
+        </li>
         {/* <Link href="/">
           <div className="text-2xl font-bold">PRICING</div>
         </Link>
