@@ -55,10 +55,10 @@ const Nav = () => {
         <DynamicSearchBar />
       </div>
       <ul className="hidden lg:flex gap-5">
-        <Link href="/movies">
+        <Link href="movies">
           <div className="text-2xl font-bold">MOVIES</div>
         </Link>
-        <Link href="/tv">
+        <Link href="tv">
           <div className="text-2xl font-bold">TV SHOWS</div>
         </Link>
         {/* <Link href="/">
