@@ -28,16 +28,16 @@ const DynamicSearchBar = dynamic(() => import("./SearchBar"), {
 const Nav = () => {
   // const { data: session } = useSession();
 
-  const [providers, setProviders] = useState(null);
-  const [toggleDropdown, setToggleDropdown] = useState(false);
+  // const [providers, setProviders] = useState(null);
+  // const [toggleDropdown, setToggleDropdown] = useState(false);
   const [toggleSearch, setToggleSearch] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setProviders(res);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await getProviders();
+  //     setProviders(res);
+  //   })();
+  // }, []);
 
   return (
     <nav className="flex bg-transparent justify-between text-white p-5 items-center">
@@ -114,7 +114,7 @@ const Nav = () => {
           </div>
         )}
       </div>
-      <ul className="lg:hidden">
+      {/* <ul className="lg:hidden">
         {!toggleSearch && (
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -122,7 +122,7 @@ const Nav = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg border-0 text-white w-screen h-screen flex flex-col pt-20 gap-8 items-center">
               <DropdownMenuLabel>
-                {/* {session?.user ? (
+                {session?.user ? (
                   <div className="flex flex-col gap-10 items-center">
                     <Avatar className="h-32 w-auto">
                       <AvatarImage src={session?.user.image} />
@@ -146,7 +146,7 @@ const Nav = () => {
                         ></MainBtn>
                       ))}
                   </ul>
-                )} */}
+                )}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
@@ -174,7 +174,7 @@ const Nav = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-      </ul>
+      </ul> */}
     </nav>
   );
 };
