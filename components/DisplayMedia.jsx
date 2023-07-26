@@ -37,8 +37,12 @@ const DisplayMedia = async ({ media, type, fetchTest }) => {
   //   setGenre(data.genres);
   // };
 
-  const test = await fetchTest;
-  const movies = test.results;
+  const fetchMovies = async () => {
+    const data = await fetchTest;
+    return data.results;
+  };
+
+  const movies = await fetchMovies();
 
   return (
     <>
