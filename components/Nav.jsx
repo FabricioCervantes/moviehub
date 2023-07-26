@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import dynamic from "next/dynamic";
 
 import Image from "next/image";
@@ -22,32 +26,34 @@ const DynamicSearchBar = dynamic(() => import("./SearchBar"), {
 });
 
 const Nav = () => {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
 
-  // const [providers, setProviders] = useState(null);
-  // const [toggleDropdown, setToggleDropdown] = useState(false);
-  // const [toggleSearch, setToggleSearch] = useState(false);
+  const [providers, setProviders] = useState(null);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [toggleSearch, setToggleSearch] = useState(false);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const res = await getProviders();
-  //     setProviders(res);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const res = await getProviders();
+      setProviders(res);
+    })();
+  }, []);
 
   return (
     <nav className="flex bg-transparent justify-between text-white p-5 items-center">
-      <Link href="/">
-        <Image
-          src="/assets/logo.png"
-          alt="logo"
-          height={150}
-          width={150}
-        ></Image>
-      </Link>
-      {/* <div className="hidden lg:block">
+      {!toggleSearch && (
+        <Link href="/">
+          <Image
+            src="/assets/logo.png"
+            alt="logo"
+            height={150}
+            width={150}
+          ></Image>
+        </Link>
+      )}
+      <div className="hidden lg:block">
         <DynamicSearchBar />
-      </div> */}
+      </div>
       <ul className="hidden lg:flex gap-5">
         <Link href="/movies">
           <div className="text-2xl font-bold">MOVIES</div>
@@ -62,7 +68,7 @@ const Nav = () => {
           <div className="text-2xl font-bold">ABOUT</div>
         </Link> */}
       </ul>
-      {/* {session?.user ? (
+      {session?.user ? (
         <div className="flex gap-5 items-center">
           <ul className="hidden lg:block">
             <MainBtn action={signOut} text="Sign Out" />
@@ -86,8 +92,8 @@ const Nav = () => {
               ></MainBtn>
             ))}
         </ul>
-      )} */}
-      {/* <div className="lg:hidden text-4xl">
+      )}
+      <div className="lg:hidden text-4xl">
         {!toggleSearch && (
           <BiSearch
             onClick={() => {
@@ -107,8 +113,8 @@ const Nav = () => {
             <DynamicSearchBar />
           </div>
         )}
-      </div> */}
-      {/* <ul className="lg:hidden">
+      </div>
+      <ul className="lg:hidden">
         {!toggleSearch && (
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -168,7 +174,7 @@ const Nav = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-      </ul> */}
+      </ul>
     </nav>
   );
 };
