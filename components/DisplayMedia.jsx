@@ -1,4 +1,3 @@
-"use client";
 import MovieCard from "@components/Card";
 import {
   Select,
