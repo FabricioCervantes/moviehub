@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const DisplayMedia = async ({ movies, type, fetchTest }) => {
+const DisplayMedia = async ({ movies, type }) => {
   const pag = Array.from(Array(5).keys()).map((i) => i + 1);
 
   // const handlePage = (item) => {
