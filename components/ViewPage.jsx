@@ -114,9 +114,15 @@ const ViewPage = ({ media }) => {
                 {media.title || media.name}
               </h1>
               <div className="flex gap-5">
-                {/* Get release date but only the year */}
-                <p>{media.release_date && media.release_date.slice(0, 4)}</p>
-                <p>{media.runtime} min</p>
+                {media.release_date && <p>{media.release_date.slice(0, 4)}</p>}
+                {/* check if there's more than one season */}
+                {media.number_of_seasons && (
+                  <p>
+                    {media.number_of_seasons}
+                    {media.number_of_seasons > 1 ? " seasons" : " season"}
+                  </p>
+                )}
+
                 <p className="flex items-center gap-2">
                   <BsFillStarFill className="text-yellow-500" />
                   {Math.round(media.vote_average * 10) / 10} / 10
@@ -124,19 +130,30 @@ const ViewPage = ({ media }) => {
               </div>
               <p className="text-lg">{media.tagline}</p>
               <p className="text-justify mt-5">{media.overview}</p>
-              <p>Director</p>
-              <div className="flex gap-5">
-                {media.credits &&
-                  media.credits.crew
-                    .filter((crew) => crew.job === "Director")
-                    .map((director) => {
-                      return (
-                        <p key={director.id} className="text-lg">
-                          {director.name}
-                        </p>
-                      );
-                    })}
-              </div>
+              {media.credits &&
+                media.credits.crew
+                  .filter((crew) => crew.job === "Director")
+                  .map((director) => {
+                    return (
+                      <div key={director.id}>
+                        <p className="font-bold">Director</p>
+                        <p className="text-lg">{director.name}</p>
+                      </div>
+                    );
+                  })}
+              {/* check for showrunner */}
+              {media.created_by && media.created_by.length > 0 && (
+                <>
+                  <p className="font-bold">Created by</p>
+                  {media.created_by.map((creator) => {
+                    return (
+                      <p key={creator.id} className="text-lg">
+                        {creator.name}
+                      </p>
+                    );
+                  })}
+                </>
+              )}
               <div className="mt-5">
                 <h1 className="mb-5 font-bold text-xl">Genres</h1>
                 <div className="flex gap-5 flex-wrap justify-center md:justify-start">
