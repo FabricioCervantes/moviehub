@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const DisplayMedia = ({ media, type }) => {
+const DisplayMedia = ({ media, type, fetchTest, genreTest }) => {
   const [movies, setMovies] = useState([]);
   const [genre, setGenre] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(28);
@@ -17,25 +17,6 @@ const DisplayMedia = ({ media, type }) => {
   const [sort, setSort] = useState("popularity.desc");
 
   const pag = Array.from(Array(5).keys()).map((i) => i + 1);
-
-  const fetchGenre = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=a97a0e69992c3fbbfda4f5387a476249`
-    ).then((res) => res.json());
-  };
-
-  const fetchUpcomingMovies = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=${page}&with_genres=${selectedGenre}&sort_by=${sort}`
-    ).then((res) => res.json());
-  };
-
-  const fetchMovies = async () => {
-    const test = await fetchGenre();
-    const upcomingMovies = await fetchUpcomingMovies();
-    setMovies(upcomingMovies.results);
-    setGenre(test.genres);
-  };
 
   const handlePage = (item) => {
     setPage(item);
@@ -53,11 +34,21 @@ const DisplayMedia = ({ media, type }) => {
     fetchMovies();
   };
 
+  const fetchMovies = async () => {
+    const data = await fetchTest;
+    setMovies(data.results);
+  };
+
+  const fetchGenres = async () => {
+    const data = await genreTest;
+    setGenre(data.genres);
+  };
+
   useEffect(() => {
     fetchMovies();
-  }, [sort, page, selectedGenre]);
+    fetchGenres();
+  }, [movies, genre]);
 
-  useEffect(() => {}, [media]);
   return (
     <>
       <>
@@ -67,11 +58,12 @@ const DisplayMedia = ({ media, type }) => {
               <SelectValue placeholder="Genre" />
             </SelectTrigger>
             <SelectContent>
-              {genre.map((item) => (
-                <SelectItem key={item.id} value={item.id}>
-                  {item.name}
-                </SelectItem>
-              ))}
+              {genre &&
+                genre.map((item) => (
+                  <SelectItem key={item.id} value={item.id}>
+                    {item.name}
+                  </SelectItem>
+                ))}
             </SelectContent>
           </Select>
           <Select onValueChange={(e) => handleSort(e)}>
