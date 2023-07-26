@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const DisplayMedia = async ({ media, type, fetchTest }) => {
+const DisplayMedia = async ({ movies, type, fetchTest }) => {
   const pag = Array.from(Array(5).keys()).map((i) => i + 1);
 
   // const handlePage = (item) => {
@@ -36,13 +36,6 @@ const DisplayMedia = async ({ media, type, fetchTest }) => {
   //   const data = await genreTest;
   //   setGenre(data.genres);
   // };
-
-  const fetchMovies = async () => {
-    const data = await fetchTest;
-    return data.results;
-  };
-
-  const movies = await fetchMovies();
 
   return (
     <>
