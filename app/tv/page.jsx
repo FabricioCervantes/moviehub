@@ -12,57 +12,57 @@ import {
 } from "@/components/ui/select";
 
 const tv = () => {
-  // const [shows, setShows] = useState([]);
-  // const [genre, setGenre] = useState([]);
-  // const [selectedGenre, setSelectedGenre] = useState();
-  // const [page, setPage] = useState(1);
-  // const [sort, setSort] = useState("vote_count.desc");
+  const [shows, setShows] = useState([]);
+  const [genre, setGenre] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState();
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState("vote_count.desc");
 
-  // const pag = Array.from(Array(5).keys()).map((i) => i + 1);
+  const pag = Array.from(Array(5).keys()).map((i) => i + 1);
 
-  // const fetchGenre = () => {
-  //   return fetch(
-  //     `https://api.themoviedb.org/3/genre/tv/list?api_key=a97a0e69992c3fbbfda4f5387a476249`
-  //   ).then((res) => res.json());
-  // };
+  const fetchGenre = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/genre/tv/list?api_key=a97a0e69992c3fbbfda4f5387a476249`
+    ).then((res) => res.json());
+  };
 
-  // const fetchUpcomingShows = () => {
-  //   return fetch(
-  //     `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=${page}&with_genres=${selectedGenre}&sort_by=${sort}`
-  //   ).then((res) => res.json());
-  // };
+  const fetchUpcomingShows = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=${page}&with_genres=${selectedGenre}&sort_by=${sort}`
+    ).then((res) => res.json());
+  };
 
-  // const fetchShows = async () => {
-  //   const test = await fetchGenre();
-  //   const upcomingMovies = await fetchUpcomingShows();
-  //   setShows(upcomingMovies.results);
-  //   setGenre(test.genres);
-  // };
+  const fetchShows = async () => {
+    const test = await fetchGenre();
+    const upcomingMovies = await fetchUpcomingShows();
+    setShows(upcomingMovies.results);
+    setGenre(test.genres);
+  };
 
-  // const handlePage = (item) => {
-  //   setPage(item);
-  //   fetchShows();
-  // };
-  // const handleGenre = (value) => {
-  //   setSelectedGenre(value);
-  //   setPage(1);
-  //   fetchShows();
-  // };
+  const handlePage = (item) => {
+    setPage(item);
+    fetchShows();
+  };
+  const handleGenre = (value) => {
+    setSelectedGenre(value);
+    setPage(1);
+    fetchShows();
+  };
 
-  // const handleSort = (value) => {
-  //   setSort(value);
-  //   setPage(1);
-  //   fetchShows();
-  // };
+  const handleSort = (value) => {
+    setSort(value);
+    setPage(1);
+    fetchShows();
+  };
 
-  // useEffect(() => {
-  //   fetchShows();
-  // }, [sort, page, selectedGenre]);
+  useEffect(() => {
+    fetchShows();
+  }, [sort, page, selectedGenre]);
 
-  // console.log(shows);
+  console.log(shows);
   return (
     <>
-      {/* <div className="flex text-white px-5 justify-end gap-5">
+      <div className="flex text-white px-5 justify-end gap-5">
         <Select onValueChange={(e) => handleGenre(e)}>
           <SelectTrigger className="w-[180px] border-2">
             <SelectValue placeholder="Genre" />
@@ -106,7 +106,7 @@ const tv = () => {
             {item}
           </p>
         ))}
-      </div> */}
+      </div>
     </>
   );
 };

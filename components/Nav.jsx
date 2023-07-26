@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+// import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import dynamic from "next/dynamic";
 
 import Image from "next/image";
