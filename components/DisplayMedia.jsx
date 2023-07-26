@@ -18,41 +18,41 @@ const DisplayMedia = ({ media, type, fetchTest, genreTest }) => {
 
   const pag = Array.from(Array(5).keys()).map((i) => i + 1);
 
-  const handlePage = (item) => {
-    setPage(item);
-    fetchMovies();
-  };
-  const handleGenre = (value) => {
-    setSelectedGenre(value);
-    setPage(1);
-    fetchMovies();
-  };
+  // const handlePage = (item) => {
+  //   setPage(item);
+  //   fetchMovies();
+  // };
+  // const handleGenre = (value) => {
+  //   setSelectedGenre(value);
+  //   setPage(1);
+  //   fetchMovies();
+  // };
 
-  const handleSort = (value) => {
-    setSort(value);
-    setPage(1);
-    fetchMovies();
-  };
+  // const handleSort = (value) => {
+  //   setSort(value);
+  //   setPage(1);
+  //   fetchMovies();
+  // };
 
   const fetchMovies = async () => {
     const data = await fetchTest;
     setMovies(data.results);
   };
 
-  const fetchGenres = async () => {
-    const data = await genreTest;
-    setGenre(data.genres);
-  };
+  // const fetchGenres = async () => {
+  //   const data = await genreTest;
+  //   setGenre(data.genres);
+  // };
 
   useEffect(() => {
     fetchMovies();
-    fetchGenres();
+    // fetchGenres();
   }, [movies, genre]);
 
   return (
     <>
       <>
-        <div className="flex text-white px-5 justify-end gap-5">
+        {/* <div className="flex text-white px-5 justify-end gap-5">
           <Select onValueChange={(e) => handleGenre(e)}>
             <SelectTrigger className="w-[180px] border-2">
               <SelectValue placeholder="Genre" />
@@ -76,7 +76,7 @@ const DisplayMedia = ({ media, type, fetchTest, genreTest }) => {
               <SelectItem value="revenue.desc">Box Office</SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </div> */}
         <div className="text-white p-5">
           <div className="flex justify-center mt-10">
             <div className="grid md:grid-cols-4 gap-5">
@@ -88,7 +88,7 @@ const DisplayMedia = ({ media, type, fetchTest, genreTest }) => {
             </div>
           </div>
         </div>
-        <div className="flex justify-end gap-5 p-2 mt-5">
+        {/* <div className="flex justify-end gap-5 p-2 mt-5">
           {pag.map((item) => (
             <p
               key={item}
@@ -107,7 +107,7 @@ const DisplayMedia = ({ media, type, fetchTest, genreTest }) => {
               {item}
             </p>
           ))}
-        </div>
+        </div> */}
       </>
     </>
   );
