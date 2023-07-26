@@ -1,6 +1,5 @@
 "use client";
 import MovieCard from "@components/Card";
-import { useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -9,13 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const DisplayMedia = ({ media, type, fetchTest, genreTest }) => {
-  const [movies, setMovies] = useState([]);
-  const [genre, setGenre] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState(28);
-  const [page, setPage] = useState(1);
-  const [sort, setSort] = useState("popularity.desc");
-
+const DisplayMedia = async ({ media, type, fetchTest }) => {
   const pag = Array.from(Array(5).keys()).map((i) => i + 1);
 
   // const handlePage = (item) => {
@@ -34,20 +27,18 @@ const DisplayMedia = ({ media, type, fetchTest, genreTest }) => {
   //   fetchMovies();
   // };
 
-  const fetchMovies = async () => {
-    const data = await fetchTest;
-    setMovies(data.results);
-  };
+  // const fetchMovies = async () => {
+  //   const data = await fetchTest;
+  //   setMovies(data.results);
+  // };
 
   // const fetchGenres = async () => {
   //   const data = await genreTest;
   //   setGenre(data.genres);
   // };
 
-  useEffect(() => {
-    fetchMovies();
-    // fetchGenres();
-  }, []);
+  const test = await fetchTest;
+  const movies = test.results;
 
   return (
     <>
