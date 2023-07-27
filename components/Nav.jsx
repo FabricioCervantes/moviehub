@@ -11,6 +11,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -27,10 +28,15 @@ const DynamicSearchBar = dynamic(() => import("./SearchBar"), {
 
 const Nav = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const [toggleSearch, setToggleSearch] = useState(false);
+
+  const handleProfileClick = () => {
+    router.push("/profile");
+  };
 
   useEffect(() => {
     (async () => {
@@ -73,7 +79,10 @@ const Nav = () => {
           <ul className="hidden lg:block">
             <MainBtn action={signOut} text="Sign Out" />
           </ul>
-          <Avatar className="hidden lg:block">
+          <Avatar
+            className="hidden lg:block"
+            onClick={() => handleProfileClick()}
+          >
             <AvatarImage src={session?.user.image} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
