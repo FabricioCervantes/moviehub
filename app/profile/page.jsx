@@ -15,13 +15,20 @@ const page = () => {
     );
   };
 
-  const getMedia = (mediaId) => {
-    return fetch(`/api/view/${mediaId}`).then((res) => res.json());
+  const getMedia = (mediaId, mediaType) => {
+    console.log(mediaType);
+    if (mediaType === "movie") {
+      return fetch(`/api/view/${mediaId}`).then((res) => res.json());
+    } else {
+      return fetch(`/api/tv/${mediaId}`).then((res) => res.json());
+    }
   };
 
   const getItems = async () => {
     const items = await getWatchlistItems();
-    const mediaPromises = items.map((item) => getMedia(item.mediaId));
+    const mediaPromises = items.map((item) =>
+      getMedia(item.mediaId, item.mediaType)
+    );
     const mediaList = await Promise.all(mediaPromises);
     const updatedWatchlist = [...watchlist, ...mediaList];
     setWatchlist(updatedWatchlist);

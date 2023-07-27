@@ -18,6 +18,7 @@ export const GET = async (request, { params }) => {
     media.credits = credits;
     media.images = images;
     media.videos = videos;
+    media.mediaType = "movie";
 
     return new Response(JSON.stringify(media), { status: 200 });
   } catch (error) {

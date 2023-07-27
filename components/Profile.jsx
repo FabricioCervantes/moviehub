@@ -20,7 +20,7 @@ const Profile = ({ user, watchlist }) => {
           <div className="grid grid-cols-4 gap-5">
             {watchlist &&
               watchlist.map((item) => (
-                <Card key={item.id} movie={item} type="movie" />
+                <Card key={item.id} movie={item} type={item.mediaType} />
               ))}
           </div>
         </div>
