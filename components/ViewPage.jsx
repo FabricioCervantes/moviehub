@@ -100,10 +100,9 @@ const ViewPage = ({ media }) => {
               width={0}
               height={0}
               sizes="100vw"
-              layout="responsive"
               style={{
                 width: "auto",
-                height: "500px",
+                height: "600px",
                 objectFit: "cover",
               }} // optional
               alt="movie poster"
