@@ -19,7 +19,9 @@ const Profile = ({ user, watchlist }) => {
           <h1 className="text-4xl font-bold mt-10 mb-5">Watchlist Elements</h1>
           <div className="grid grid-cols-4 gap-5">
             {watchlist &&
-              watchlist.map((item) => <Card key={item.id} movie={item} />)}
+              watchlist.map((item) => (
+                <Card key={item.id} movie={item} type="movie" />
+              ))}
           </div>
         </div>
       </div>
