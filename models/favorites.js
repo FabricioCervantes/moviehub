@@ -5,9 +5,13 @@ const FavoritesSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  movieId: {
+  mediaId: {
     type: String,
     required: [true, "Title is required."],
+  },
+  mediaType: {
+    type: String,
+    required: [true, "Type is required."],
   },
 });
 

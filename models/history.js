@@ -5,13 +5,17 @@ const HistorySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  movieId: {
+  mediaId: {
     type: String,
     required: [true, "Title is required."],
   },
   timeWatched: {
     type: Date,
     default: Date.now,
+  },
+  mediaType: {
+    type: String,
+    required: [true, "Type is required."],
   },
 });
 

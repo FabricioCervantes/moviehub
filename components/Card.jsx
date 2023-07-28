@@ -3,9 +3,10 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { AiFillLike } from "react-icons/ai";
+import { AiFillLike, AiOutlineHistory } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { MdOutlineAdd } from "react-icons/md";
+import { GiPopcorn } from "react-icons/gi";
 import { useSession } from "next-auth/react";
 
 function MovieCard({ movie, type }) {
@@ -29,6 +30,60 @@ function MovieCard({ movie, type }) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleFavoriteclick = async () => {
+    try {
+      const response = await fetch("/api/lists/favorites/new", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: session?.user.id,
+          mediaId: movie.id,
+          mediaType: type,
+        }),
+      });
+
+      if (response.ok) {
+        router.push("/profile");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleHistoryclick = async () => {
+    try {
+      const myDate = getCurrentDate();
+      const response = await fetch("/api/lists/history/new", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: session?.user.id,
+          mediaId: movie.id,
+          timeWatched: myDate,
+          mediaType: type,
+        }),
+      });
+
+      if (response.ok) {
+        router.push("/profile");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // get current date with format YYYY-MM-DD HH:MM:SS
+  const getCurrentDate = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // getMonth() is zero-based
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    return formattedDate;
   };
 
   const handleOnClick = () => {
@@ -65,10 +120,20 @@ function MovieCard({ movie, type }) {
           {movie.first_air_date && <p>{movie.first_air_date.split("-")[0]}</p>}
         </div>
         <div className="flex mt-2 justify-between">
-          <MdOutlineAdd
-            className="text-4xl hover:cursor-pointer"
-            onClick={() => handleAddclick()}
-          />
+          <div className="flex gap-2 items-center">
+            <MdOutlineAdd
+              className="text-4xl hover:cursor-pointer"
+              onClick={() => handleAddclick()}
+            />
+            <GiPopcorn
+              className="text-4xl hover:cursor-pointer"
+              onClick={() => handleFavoriteclick()}
+            />
+            <AiOutlineHistory
+              className="text-4xl hover:cursor-pointer"
+              onClick={() => handleHistoryclick()}
+            />
+          </div>
           <div className="flex justify-between gap-5">
             {/* <p>{movie.runtime}</p> */}
             <p className="flex gap-2 items-center">
