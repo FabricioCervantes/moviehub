@@ -1,4 +1,8 @@
+"use client";
+
 import MovieCard from "@components/Card";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 const DisplayMedia = ({ media, type }) => {
   return (

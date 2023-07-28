@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useSession } from "next-auth/react";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -15,6 +16,8 @@ const Movies = () => {
   const [selectedGenre, setSelectedGenre] = useState(28);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("popularity.desc");
+
+  const { data: session } = useSession();
 
   const pag = Array.from(Array(5).keys()).map((i) => i + 1);
 
@@ -33,6 +36,33 @@ const Movies = () => {
   const fetchMovies = async () => {
     const test = await fetchGenre();
     const upcomingMovies = await fetchUpcomingMovies();
+
+    if (session) {
+      const historyItems = await getHistoryItems();
+      const favoritesItems = await getFavoritesItems();
+      const watchlistItems = await getWatchlistItems();
+
+      upcomingMovies.results.map((item) => {
+        favoritesItems.map((favorite) => {
+          if (item.id == favorite.mediaId) {
+            item.favorite = true;
+          }
+        });
+        historyItems.map((history) => {
+          if (item.id == history.mediaId) {
+            item.history = true;
+          }
+        });
+        watchlistItems.map((watchlist) => {
+          if (item.id == watchlist.mediaId) {
+            item.watchlist = true;
+          }
+        });
+      });
+    } else {
+      console.log("Not session");
+    }
+
     setMovies(upcomingMovies.results);
     setGenre(test.genres);
   };
@@ -51,6 +81,24 @@ const Movies = () => {
     setSort(value);
     setPage(1);
     fetchMovies();
+  };
+
+  const getWatchlistItems = () => {
+    return fetch(`/api/lists/watchlist/${session?.user.id}`).then((res) =>
+      res.json()
+    );
+  };
+
+  const getHistoryItems = () => {
+    return fetch(`/api/lists/history/${session?.user.id}`).then((res) =>
+      res.json()
+    );
+  };
+
+  const getFavoritesItems = () => {
+    return fetch(`/api/lists/favorites/${session?.user.id}`).then((res) =>
+      res.json()
+    );
   };
 
   useEffect(() => {
