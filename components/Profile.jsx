@@ -3,9 +3,8 @@ import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Card from "@/components/Card";
 
-const Profile = ({ user, watchlist }) => {
+const Profile = ({ user, watchlist, history, favorites }) => {
   const userImageUrl = user.image.replaceAll("s96-c", "s1000-c");
-  console.log(watchlist);
   return (
     <>
       <div className="flex justify-center">
@@ -20,6 +19,20 @@ const Profile = ({ user, watchlist }) => {
           <div className="grid grid-cols-4 gap-5">
             {watchlist &&
               watchlist.map((item) => (
+                <Card key={item.id} movie={item} type={item.mediaType} />
+              ))}
+          </div>
+          <h1 className="text-4xl font-bold mt-10 mb-5">History Elements</h1>
+          <div className="grid grid-cols-4 gap-5">
+            {history &&
+              history.map((item) => (
+                <Card key={item.id} movie={item} type={item.mediaType} />
+              ))}
+          </div>
+          <h1 className="text-4xl font-bold mt-10 mb-5">Favorites Elements</h1>
+          <div className="grid grid-cols-4 gap-5">
+            {favorites &&
+              favorites.map((item) => (
                 <Card key={item.id} movie={item} type={item.mediaType} />
               ))}
           </div>
