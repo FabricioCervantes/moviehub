@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MdOutlineAddCircle, MdFavorite, MdHistory } from "react-icons/md";
+import { BsCheckCircleFill } from "react-icons/bs";
 import { GiPopcorn } from "react-icons/gi";
 import { AiOutlineHistory, AiFillEye } from "react-icons/ai";
 import { useRouter } from "next/navigation";
@@ -122,7 +123,7 @@ const ListsButton = ({ media, type }) => {
           >
             {media.watchlist ? (
               <>
-                <AiFillEye className="text-4xl mr-2" />
+                <BsCheckCircleFill className="text-3xl ml-1  text-red-500 mr-2" />
                 <p>Added to watchlist</p>
               </>
             ) : (
@@ -138,7 +139,7 @@ const ListsButton = ({ media, type }) => {
           >
             {media.favorite ? (
               <>
-                <MdFavorite className="text-4xl mr-2" />
+                <BsCheckCircleFill className="text-3xl ml-1  text-red-500 mr-2" />
                 <p>Added to favorites</p>
               </>
             ) : (
@@ -154,7 +155,7 @@ const ListsButton = ({ media, type }) => {
           >
             {media.history ? (
               <>
-                <MdHistory className="text-4xl mr-2" />
+                <BsCheckCircleFill className="text-3xl ml-1  text-red-500 mr-2" />
                 <p>Added to history</p>
               </>
             ) : (
