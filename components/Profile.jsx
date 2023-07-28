@@ -8,7 +8,7 @@ const Profile = ({ user, watchlist, history, favorites }) => {
   return (
     <>
       <div className="flex justify-center">
-        <div className="text-white max-w-5xl w-full grid place-content-center text-center">
+        <div className="text-white max-w-5xl w-full grid place-content-center place-items-center text-center">
           <Avatar className="w-80 h-80">
             <AvatarImage src={userImageUrl} />
             <AvatarFallback>CN</AvatarFallback>
