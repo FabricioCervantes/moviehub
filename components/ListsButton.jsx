@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MdOutlineAddCircle, MdFavorite, MdHistory } from "react-icons/md";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { GiPopcorn } from "react-icons/gi";
-import { AiOutlineHistory, AiFillEye } from "react-icons/ai";
+import { AiFillEye } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -20,9 +19,13 @@ const ListsButton = ({ media, type }) => {
   const router = useRouter();
   const { data: session } = useSession();
 
+  const [watchlist, setWatchlist] = useState(media.watchlist);
+  const [favorites, setFavorites] = useState(media.favorite);
+  const [history, setHistory] = useState(media.history);
+
   console.log(media);
   const handleAddclick = async () => {
-    if (!media.watchlist) {
+    if (!watchlist) {
       try {
         const response = await fetch("/api/lists/watchlist/new", {
           method: "POST",
@@ -34,7 +37,7 @@ const ListsButton = ({ media, type }) => {
         });
 
         if (response.ok) {
-          router.push("/profile");
+          setWatchlist(true);
         }
       } catch (error) {
         console.log(error);
@@ -44,52 +47,73 @@ const ListsButton = ({ media, type }) => {
         await fetch(`/api/lists/watchlist/${media.id}`, {
           method: "DELETE",
         });
+        setWatchlist(false);
       } catch (error) {
         console.log(error);
       }
       //   errase watchlist from media
-      media.watchlist = false;
-      window.location.reload(true);
     }
   };
 
   const handleFavoriteclick = async () => {
-    try {
-      const response = await fetch("/api/lists/favorites/new", {
-        method: "POST",
-        body: JSON.stringify({
-          userId: session?.user.id,
-          mediaId: media.id,
-          mediaType: type,
-        }),
-      });
+    if (!favorites) {
+      try {
+        const response = await fetch("/api/lists/favorites/new", {
+          method: "POST",
+          body: JSON.stringify({
+            userId: session?.user.id,
+            mediaId: media.id,
+            mediaType: type,
+          }),
+        });
 
-      if (response.ok) {
-        router.push("/profile");
+        if (response.ok) {
+          setFavorites(true);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      try {
+        await fetch(`/api/lists/favorites/${media.id}`, {
+          method: "DELETE",
+        });
+        setFavorites(false);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const handleHistoryclick = async () => {
-    try {
-      const myDate = getCurrentDate();
-      const response = await fetch("/api/lists/history/new", {
-        method: "POST",
-        body: JSON.stringify({
-          userId: session?.user.id,
-          mediaId: media.id,
-          timeWatched: myDate,
-          mediaType: type,
-        }),
-      });
+    if (!history) {
+      try {
+        const myDate = getCurrentDate();
+        const response = await fetch("/api/lists/history/new", {
+          method: "POST",
+          body: JSON.stringify({
+            userId: session?.user.id,
+            mediaId: media.id,
+            timeWatched: myDate,
+            mediaType: type,
+          }),
+        });
 
-      if (response.ok) {
-        router.push("/profile");
+        if (response.ok) {
+          setHistory(true);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      try {
+        await fetch(`/api/lists/history/${media.id}`, {
+          method: "DELETE",
+        });
+        setHistory(false);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -107,7 +131,6 @@ const ListsButton = ({ media, type }) => {
     return formattedDate;
   };
 
-  useEffect(() => {}, [media]);
   return (
     <>
       <DropdownMenu>
@@ -121,7 +144,7 @@ const ListsButton = ({ media, type }) => {
             onClick={() => handleAddclick()}
             className="hover:cursor-pointer"
           >
-            {media.watchlist ? (
+            {watchlist ? (
               <>
                 <BsCheckCircleFill className="text-3xl ml-1  text-red-500 mr-2" />
                 <p>Added to watchlist</p>
@@ -137,7 +160,7 @@ const ListsButton = ({ media, type }) => {
             onClick={() => handleFavoriteclick()}
             className="hover:cursor-pointer"
           >
-            {media.favorite ? (
+            {favorites ? (
               <>
                 <BsCheckCircleFill className="text-3xl ml-1  text-red-500 mr-2" />
                 <p>Added to favorites</p>
@@ -153,7 +176,7 @@ const ListsButton = ({ media, type }) => {
             onClick={() => handleHistoryclick()}
             className="hover:cursor-pointer"
           >
-            {media.history ? (
+            {history ? (
               <>
                 <BsCheckCircleFill className="text-3xl ml-1  text-red-500 mr-2" />
                 <p>Added to history</p>
