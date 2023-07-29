@@ -17,6 +17,8 @@ function MovieCard({ movie, type }) {
     else router.push(`/tv/${movie.id}`);
   };
 
+  console.log(movie);
+
   return (
     <div className=" text-white rounded-md w-fit ">
       <motion.div

@@ -33,6 +33,13 @@ const Movies = () => {
     ).then((res) => res.json());
   };
 
+  const validateMediaItems = (mediaItems) => {
+    return mediaItems.reduce((acc, item) => {
+      acc[item.mediaId] = item;
+      return acc;
+    }, {});
+  };
+
   const fetchMovies = async () => {
     const test = await fetchGenre();
     const upcomingMovies = await fetchUpcomingMovies();
@@ -42,29 +49,32 @@ const Movies = () => {
       const favoritesItems = await getFavoritesItems();
       const watchlistItems = await getWatchlistItems();
 
-      upcomingMovies.results.map((item) => {
-        favoritesItems.map((favorite) => {
-          if (item.id == favorite.mediaId) {
-            item.favorite = true;
-          }
-        });
-        historyItems.map((history) => {
-          if (item.id == history.mediaId) {
-            item.history = true;
-          }
-        });
-        watchlistItems.map((watchlist) => {
-          if (item.id == watchlist.mediaId) {
-            item.watchlist = true;
-          }
-        });
+      const favoritesMap = validateMediaItems(favoritesItems);
+      const historyMap = validateMediaItems(historyItems);
+      const watchlistMap = validateMediaItems(watchlistItems);
+
+      const updatedMovies = upcomingMovies.results.map((item) => {
+        if (favoritesMap[item.id]) {
+          item.favorite = true;
+        }
+
+        if (historyMap[item.id]) {
+          item.history = true;
+        }
+
+        if (watchlistMap[item.id]) {
+          item.watchlist = true;
+        }
+
+        return item;
       });
+      setMovies(updatedMovies);
+      setGenre(test.genres);
     } else {
       console.log("Not session");
+      setMovies(upcomingMovies.results);
+      setGenre(test.genres);
     }
-
-    setMovies(upcomingMovies.results);
-    setGenre(test.genres);
   };
 
   const handlePage = (item) => {

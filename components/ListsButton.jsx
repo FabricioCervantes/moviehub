@@ -23,7 +23,6 @@ const ListsButton = ({ media, type }) => {
   const [favorites, setFavorites] = useState(media.favorite);
   const [history, setHistory] = useState(media.history);
 
-  console.log(media);
   const handleAddclick = async () => {
     if (!watchlist) {
       try {
