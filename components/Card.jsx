@@ -6,9 +6,11 @@ import { motion } from "framer-motion";
 import { AiFillLike } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import ListsButton from "./ListsButton";
+import { useSession } from "next-auth/react";
 
 function MovieCard({ movie, type }) {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleOnClick = () => {
     if (type === "movie") router.push(`/movies/${movie.id}`);
@@ -44,7 +46,7 @@ function MovieCard({ movie, type }) {
           {movie.first_air_date && <p>{movie.first_air_date.split("-")[0]}</p>}
         </div>
         <div className="flex mt-2 justify-between">
-          <ListsButton media={movie} type={type} />
+          {session && <ListsButton media={movie} type={type} />}
           <div className="flex justify-between gap-5">
             {/* <p>{movie.runtime}</p> */}
             <p className="flex gap-2 items-center">
