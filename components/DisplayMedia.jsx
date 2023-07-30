@@ -1,13 +1,18 @@
 "use client";
 
 import MovieCard from "@components/Card";
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+
+import { motion, AnimatePresence } from "framer-motion";
 
 const DisplayMedia = ({ media, type }) => {
   return (
     <>
-      <div className="text-white p-5">
+      <motion.div
+        initial={{ y: 200, x: 0 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-white p-5"
+      >
         <div className="flex justify-center mt-10">
           <div className="grid md:grid-cols-4 gap-5">
             {media.map((movie) => (
@@ -17,7 +22,7 @@ const DisplayMedia = ({ media, type }) => {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
