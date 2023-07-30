@@ -46,7 +46,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className="flex bg-transparent justify-between text-white p-5 items-center">
+    <nav className="flex bg-transparent fixed z-50 left-0 bg  w-full justify-between text-white p-5 items-center">
       {!toggleSearch && (
         <Link href="/">
           <Image
