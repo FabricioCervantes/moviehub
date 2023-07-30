@@ -15,7 +15,7 @@ const PersonProfile = ({ person }) => {
         transition={{ duration: 0.5 }}
         className="flex justify-center"
       >
-        <div className="text-white max-w-5xl w-full">
+        <div className="text-white max-w-5xl w-full mt-20">
           <div className="flex flex-col md:flex-row p-3 md:p-10 gap-10">
             <div className="min-w-fit flex flex-col items-center">
               <Image

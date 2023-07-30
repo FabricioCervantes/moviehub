@@ -99,7 +99,7 @@ const ViewPage = ({ media }) => {
         transition={{ duration: 0.5 }}
         className={`flex justify-center pb-5`}
       >
-        <div className="text-white max-w-5xl w-full">
+        <div className="text-white max-w-5xl w-full mt-20">
           <div className="mt-10 flex p-2 md:p-0 flex-col md:flex-row gap-10">
             <Image
               src={`https://image.tmdb.org/t/p/w500${media.poster_path}`}
