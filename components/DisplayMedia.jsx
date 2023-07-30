@@ -13,7 +13,7 @@ const DisplayMedia = ({ media, type }) => {
         transition={{ duration: 0.5 }}
         className="text-white p-5"
       >
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center">
           <div className="grid md:grid-cols-4 gap-5">
             {media.map((movie) => (
               <div key={movie.id}>

@@ -125,7 +125,7 @@ const Movies = () => {
         <LoadingAnimation />
       ) : (
         <>
-          <div className="flex text-white px-5 justify-end gap-5">
+          <div className="flex text-white px-5 pt-32 pb-10 justify-end gap-5">
             <Select onValueChange={(e) => handleGenre(e)}>
               <SelectTrigger className="w-[180px] border-2">
                 <SelectValue placeholder="Genre" />
