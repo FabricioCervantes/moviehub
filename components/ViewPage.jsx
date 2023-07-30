@@ -12,6 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Carousel from "@components/Carousel";
+import { motion } from "framer-motion";
 
 const EmblaCarousel = ({ actors }) => {
   const router = useRouter();
@@ -92,7 +93,12 @@ const ViewPage = ({ media }) => {
       className="bg-[image:var(--image-url)] bg_page h-full md:bg-fixed"
       style={{ "--image-url": `url(${bgPhoto})` }}
     >
-      <div className={`flex justify-center pb-5`}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className={`flex justify-center pb-5`}
+      >
         <div className="text-white max-w-5xl w-full">
           <div className="mt-10 flex p-2 md:p-0 flex-col md:flex-row gap-10">
             <Image
@@ -172,7 +178,7 @@ const ViewPage = ({ media }) => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
       <div className="p-5">
         <p className="text-4xl font-bold text-center text-white px-5">Cast</p>
         {media.credits && media.credits.cast.length > 0 && (
