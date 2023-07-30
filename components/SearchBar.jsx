@@ -4,6 +4,7 @@ import { BiSearch } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { motion } from "framer-motion";
 
 const SearchBar = () => {
   const [filteredData, setFilteredData] = useState([]);
@@ -90,7 +91,7 @@ const SearchBar = () => {
       <div className="flex text-white nav-bg p-2 rounded-md">
         <input
           type="text"
-          placeholder="Search movie..."
+          placeholder="Search movie, tv show, people..."
           value={wordEntered}
           onChange={handleFilter}
           onKeyDown={(e) => {
@@ -122,7 +123,12 @@ const SearchBar = () => {
                 }}
               >
                 {/* get image, title */}
-                <div className="flex gap-2 items-center">
+                <motion.div
+                  initial={{ y: 100, x: 0 }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.1 }}
+                  className="flex gap-2 items-center"
+                >
                   <Avatar className="h-16 w-16">
                     {value.poster_path && (
                       <AvatarImage
@@ -140,7 +146,7 @@ const SearchBar = () => {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                   <div className="text-xl">{value.title || value.name}</div>
-                </div>
+                </motion.div>
               </div>
             );
           })}
