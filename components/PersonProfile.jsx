@@ -4,11 +4,17 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import MovieCard from "./Card";
 import Carousel from "./Carousel";
+import { motion } from "framer-motion";
 
 const PersonProfile = ({ person }) => {
   return (
     <>
-      <div className="flex justify-center">
+      <motion.div
+        initial={{ y: 200, x: 0 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="flex justify-center"
+      >
         <div className="text-white max-w-5xl w-full">
           <div className="flex flex-col md:flex-row p-3 md:p-10 gap-10">
             <div className="min-w-fit flex flex-col items-center">
@@ -56,7 +62,7 @@ const PersonProfile = ({ person }) => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
       <h1 className="text-4xl font-bold text-center text-white">Images</h1>
       <div className="p-5">
         {person.images && (
